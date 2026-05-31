@@ -1,10 +1,12 @@
 <Solution>
 	<Folder Name="/Solution Items/">
+		<File Path=".editorconfig" />
+		<File Path=".gitignore" />
 		<File Path="Directory.Build.props" />
 		<File Path="Directory.Packages.props" />
 	</Folder>
 	<Folder Name="/src/">
-		<Project Path="src/AspNetCore.Boilerplate/AspNetCore.Boilerplate.csproj" />
+		<Project Path="src/AspNetCore.Boilerplate/Phymnary.SugarPot.AspNetCore.csproj" />
 		<Project Path="src/Phymnary.SugarPot.DependencyInjection/Phymnary.SugarPot.DependencyInjection.csproj" />
 		<Project Path="src/Phymnary.SugarPot.RoslynComponents/Phymnary.SugarPot.RoslynComponents.csproj" />
 	</Folder>

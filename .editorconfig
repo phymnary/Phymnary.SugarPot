@@ -1,0 +1,13 @@
+root = true
+
+[*.{{csproj,props}}]
+indent_style = space
+indent_size = 2
+
+# All files
+[*]
+indent_style = space
+
+# Xml files
+[*.xml]
+indent_size = 2

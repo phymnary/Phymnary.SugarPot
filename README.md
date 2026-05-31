@@ -1,2 +1,1 @@
-# AspNetCore.Boilerplate
- 
+# Phymnary.SugarPot

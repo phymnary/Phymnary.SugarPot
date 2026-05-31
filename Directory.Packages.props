@@ -1,23 +1,23 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-	<MsVersion>8.0.27</MsVersion>
-	<MsExtVersion>10.0.8</MsExtVersion>
+	  <MsVersion>8.0.27</MsVersion>
+	  <MsExtVersion>10.0.8</MsExtVersion>
   </PropertyGroup>
 	
- <ItemGroup>
-   <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(MsExtVersion)" />
-   <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MsExtVersion)" />
-   <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(MsVersion)" />
-   <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MsVersion)" />
-   <PackageVersion Include="System.Linq.Async" Version="6.0.3" />
-   <PackageVersion Include="FluentValidation" Version="12.1.0" />
-   <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.1" />
-   <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
-   <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
-   <PackageVersion Include="xunit.v3" Version="3.2.2" />
-   <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
-   <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0" />
-   <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.0" />
- </ItemGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(MsExtVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MsExtVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(MsVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MsVersion)" />
+    <PackageVersion Include="System.Linq.Async" Version="6.0.3" />
+    <PackageVersion Include="FluentValidation" Version="12.1.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.1" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="xunit.v3" Version="3.2.2" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.3.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.3.0" />
+  </ItemGroup>
 </Project>
