@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.Api;
+namespace Phymnary.SugarPot.AspNetCore.Api;
 
 public class RequestedAt
 {

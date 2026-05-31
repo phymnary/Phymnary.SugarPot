@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace AspNetCore.Boilerplate;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public class AspForbiddenEndpointException(string message) : Exception(message), IAspException
 {

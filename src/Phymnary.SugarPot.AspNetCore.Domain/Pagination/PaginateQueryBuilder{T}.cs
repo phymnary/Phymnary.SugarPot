@@ -1,7 +1,8 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.Domain.Pagination;
 
-namespace AspNetCore.Boilerplate.Domain.Pagination;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Pagination;
 
 public static class PaginateQueryBuilderExtensions
 {

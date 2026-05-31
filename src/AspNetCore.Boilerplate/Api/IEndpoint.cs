@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace AspNetCore.Boilerplate.Api;
+namespace Phymnary.SugarPot.AspNetCore.Api;
 
 public interface IEndpoint
 {

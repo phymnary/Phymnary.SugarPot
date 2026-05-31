@@ -1,9 +1,9 @@
-namespace AspNetCore.Boilerplate.Api;
+namespace Phymnary.SugarPot.AspNetCore.Api;
 
 /// <summary>
-/// <para>Generate a partial class implement <see cref="AspNetCore.Boilerplate.Api.IEndpoint"/> that needs a HandleAsync method from base class</para>
+/// <para>Generate a partial class implement <see cref="IEndpoint"/> that needs a HandleAsync method from base class</para>
 /// <para>Route pattern is from string property name "RoutePattern" or group method that have <see cref="AspNetCore.Boilerplate.Api.RoutePatternAttribute">[RoutePatternAttribute]</see></para>
-/// <para>Route builder can be decorated by group method that have <see cref="AspNetCore.Boilerplate.Api.RouteBuilderAttribute">[RouteBuilderAttribute]</see> or "BuildRoute" method.
+/// <para>Route builder can be decorated by group method that have <see cref="RouteBuilderAttribute">[RouteBuilderAttribute]</see> or "BuildRoute" method.
 /// The method must have one argument and return type of <see cref="Microsoft.AspNetCore.Builder.RouteHandlerBuilder"/>
 /// </para>
 /// <example>

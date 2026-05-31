@@ -1,7 +1,7 @@
-using AspNetCore.Boilerplate.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
-namespace AspNetCore.Boilerplate.Api.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Api.Extensions;
 
 public static class ScopeFactoryExtensions
 {

@@ -1,6 +1,6 @@
-using AspNetCore.Boilerplate.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
-namespace AspNetCore.Boilerplate.Api;
+namespace Phymnary.SugarPot.AspNetCore.Api;
 
 public class HttpContextCurrentTenant : ICurrentTenant
 {

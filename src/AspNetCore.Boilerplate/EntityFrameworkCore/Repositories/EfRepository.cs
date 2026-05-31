@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
-using AspNetCore.Boilerplate.Application.Extensions;
 using AspNetCore.Boilerplate.Domain;
 using AspNetCore.Boilerplate.Domain.Pagination;
 using Microsoft.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.Application.Extensions;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
 
 public abstract class EfRepository<TDbContext, TEntity>(
     TDbContext dbContext,

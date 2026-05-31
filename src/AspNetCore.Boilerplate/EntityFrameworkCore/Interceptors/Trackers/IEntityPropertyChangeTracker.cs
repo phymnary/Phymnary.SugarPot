@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Interceptors.Trackers;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors.Trackers;
 
 public interface IEntityPropertyChangeTracker
 {

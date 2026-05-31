@@ -1,7 +1,8 @@
+using AspNetCore.Boilerplate;
 using AspNetCore.Boilerplate.Api.ExceptionHandler;
 using FluentValidation;
 
-namespace AspNetCore.Boilerplate.Application.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Application.Extensions;
 
 public static class ValidatorExtensions
 {

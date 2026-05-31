@@ -1,16 +1,10 @@
-namespace AspNetCore.Boilerplate.Domain;
+namespace Phymnary.SugarPot.AspNetCore.Domain;
 
 public interface ISoftDelete
 {
     Guid? DeletedById { get; set; }
 
     DateTimeOffset? DeletedAt { get; set; }
-
-    public void UndoDelete()
-    {
-        DeletedAt = null;
-        DeletedById = null;
-    }
 
     public void SoftDeleted()
     {

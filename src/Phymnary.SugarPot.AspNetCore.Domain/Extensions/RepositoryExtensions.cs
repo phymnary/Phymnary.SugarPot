@@ -1,7 +1,6 @@
-using AspNetCore.Boilerplate.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Extensions;
 
 public static class RepositoryExtensions
 {

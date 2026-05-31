@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using static System.Linq.Expressions.Expression;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
 
 public static class ModelBuilderExtensions
 {

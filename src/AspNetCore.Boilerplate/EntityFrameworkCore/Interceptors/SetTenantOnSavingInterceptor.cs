@@ -1,8 +1,9 @@
+using AspNetCore.Boilerplate;
 using AspNetCore.Boilerplate.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Interceptors;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors;
 
 public class SetTenantOnSavingInterceptor(ICurrentTenant currentTenant) : SaveChangesInterceptor
 {

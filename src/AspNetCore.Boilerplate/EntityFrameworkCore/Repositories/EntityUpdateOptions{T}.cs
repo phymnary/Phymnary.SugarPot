@@ -1,6 +1,6 @@
 using AspNetCore.Boilerplate.Domain;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
 
 public class EntityUpdateOptions<TEntity>
     where TEntity : class, IEntity

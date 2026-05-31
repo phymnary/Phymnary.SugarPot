@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.Api;
+namespace Phymnary.SugarPot.AspNetCore.Api;
 
 /// <summary>
 /// Mark a static method as route pattern builder for a group of endpoints. <br/>

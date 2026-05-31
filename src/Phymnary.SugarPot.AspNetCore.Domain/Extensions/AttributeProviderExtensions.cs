@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace AspNetCore.Boilerplate.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Extensions;
 
 public static class AttributeProviderExtensions
 {

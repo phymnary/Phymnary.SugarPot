@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.WebUtilities;
 
-namespace AspNetCore.Boilerplate.Utils;
+namespace Phymnary.SugarPot.AspNetCore.Utils;
 
 public class UrlBuilder(string url)
 {

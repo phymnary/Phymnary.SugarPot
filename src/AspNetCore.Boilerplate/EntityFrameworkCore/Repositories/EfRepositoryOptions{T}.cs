@@ -1,7 +1,7 @@
 using AspNetCore.Boilerplate.Domain;
 using FluentValidation;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
 
 public abstract class EfRepositoryOptions<TEntity> : IRepositoryOptions<TEntity>
     where TEntity : class, IEntity

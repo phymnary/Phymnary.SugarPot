@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AspNetCore.Boilerplate;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public interface IModule
 {

@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
-using AspNetCore.Boilerplate.Domain.Pagination;
 using Microsoft.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.Domain.Pagination;
 
-namespace AspNetCore.Boilerplate.Domain;
+namespace Phymnary.SugarPot.AspNetCore.Domain;
 
 public interface IRepository<TEntity>
     where TEntity : class, IEntity

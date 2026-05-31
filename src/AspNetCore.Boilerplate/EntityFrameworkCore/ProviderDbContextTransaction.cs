@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
 internal sealed class ProviderDbContextTransaction(
     IDbContextTransaction transaction,

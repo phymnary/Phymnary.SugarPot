@@ -1,16 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AspNetCore.Boilerplate.Domain;
+namespace Phymnary.SugarPot.AspNetCore.Domain;
 
-public interface IEntity
-{
-    object GetKey();
-}
+public interface IEntity;
 
 public interface IEntity<out TKey> : IEntity
     where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
 {
-    [Key]
     TKey Id { get; }
 }
 
@@ -24,11 +20,5 @@ public abstract class Entity<TKey> : IEntity<TKey>
         Id = id;
     }
 
-    [Key]
     public TKey Id { get; protected init; } = default!;
-
-    public object GetKey()
-    {
-        return Id;
-    }
 }

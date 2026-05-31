@@ -1,8 +1,9 @@
-using AspNetCore.Boilerplate.Api;
 using AspNetCore.Boilerplate.Domain;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Phymnary.SugarPot.AspNetCore.Api;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Interceptors;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors;
 
 public class SoftDeleteInterceptor(ICurrentUser currentUser, RequestedAt requestedAt)
     : SaveChangesInterceptor

@@ -7,6 +7,7 @@
 	</Folder>
 	<Folder Name="/src/">
 		<Project Path="src/AspNetCore.Boilerplate/Phymnary.SugarPot.AspNetCore.csproj" />
+		<Project Path="src/Phymnary.SugarPot.AspNetCore.Domain/Phymnary.SugarPot.AspNetCore.Domain.csproj" Id="2a7186b0-a6f2-4293-abba-2d24b88521d4" />
 		<Project Path="src/Phymnary.SugarPot.DependencyInjection/Phymnary.SugarPot.DependencyInjection.csproj" />
 		<Project Path="src/Phymnary.SugarPot.RoslynComponents/Phymnary.SugarPot.RoslynComponents.csproj" />
 	</Folder>

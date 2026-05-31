@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
 
 public class EfRepositoryAddons(IAbortedProvider abortedProvider)
 {

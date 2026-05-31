@@ -1,20 +1,14 @@
 using System.Linq.Expressions;
 
-namespace AspNetCore.Boilerplate.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Extensions;
 
 public static class EnumExtensions
 {
-    public static int StrictParse<T>(this T? value, T defaultValue = default)
+    public static bool TryGetExplicit<T>(this T value, out int parsed)
         where T : struct, Enum
     {
-        var parsing = value ?? defaultValue;
-
-        if (!Enum.IsDefined(parsing))
-            throw new AspBadRequestException(
-                $"Enum {typeof(T).Name} with value {value} is not defined"
-            );
-
-        return CompiledLambdaFunc(parsing);
+        parsed = CompiledLambdaFunc(value);
+        return Enum.IsDefined(value);
     }
 
     private static int CompiledLambdaFunc<TEnum>(TEnum value)

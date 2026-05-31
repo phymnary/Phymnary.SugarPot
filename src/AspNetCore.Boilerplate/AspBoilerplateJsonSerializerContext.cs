@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using AspNetCore.Boilerplate.Api.ExceptionHandler;
+using Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
 
 namespace AspNetCore.Boilerplate;
 

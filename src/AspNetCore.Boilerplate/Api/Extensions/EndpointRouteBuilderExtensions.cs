@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AspNetCore.Boilerplate.Api.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Api.Extensions;
 
 public static class EndpointRouteBuilderExtensions
 {

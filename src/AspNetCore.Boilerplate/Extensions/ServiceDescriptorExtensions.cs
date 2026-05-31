@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AspNetCore.Boilerplate.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 internal static class ServiceDescriptorExtensions
 {

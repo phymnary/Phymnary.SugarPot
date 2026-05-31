@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
 public class DbFunctionProvider<TDbContext>(TDbContext dbContext, IAbortedProvider ctProvider)
     : IDbFunctionProvider

@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
 public interface ICurrentUser
 {

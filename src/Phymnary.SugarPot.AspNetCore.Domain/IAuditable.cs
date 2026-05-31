@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.Domain;
+namespace Phymnary.SugarPot.AspNetCore.Domain;
 
 public interface IAuditable
 {

@@ -1,7 +1,7 @@
 using System.Net;
-using AspNetCore.Boilerplate.Api.ExceptionHandler;
+using Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
 
-namespace AspNetCore.Boilerplate;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public class EntityValidationException(string message) : Exception(message), IAspException
 {

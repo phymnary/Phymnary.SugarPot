@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.Domain.Pagination;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Pagination;
 
 public class PaginateResult<TEntity>
 {

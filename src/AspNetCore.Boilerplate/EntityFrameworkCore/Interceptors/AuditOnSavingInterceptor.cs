@@ -1,12 +1,13 @@
-using AspNetCore.Boilerplate.Api;
 using AspNetCore.Boilerplate.Domain;
-using AspNetCore.Boilerplate.EntityFrameworkCore.Extensions;
-using AspNetCore.Boilerplate.EntityFrameworkCore.Interceptors.Trackers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Phymnary.SugarPot.AspNetCore.Api;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors.Trackers;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Interceptors;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors;
 
 public class AuditOnSavingInterceptor(
     ICurrentUser currentUser,

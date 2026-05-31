@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.Api.ExceptionHandler;
+namespace Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
 
 public interface IAspErrorMessageProvider
 {

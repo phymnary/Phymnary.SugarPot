@@ -1,12 +1,13 @@
 using System.Security.Claims;
-using AspNetCore.Boilerplate.Api;
-using AspNetCore.Boilerplate.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Phymnary.SugarPot.AspNetCore;
+using Phymnary.SugarPot.AspNetCore.Api;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 using Phymnary.SugarPot.DependencyInjection;
 
-namespace AspNetCore.Boilerplate.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 /// <summary>
 /// UseDeveloperExceptionPage is added first when the HostingEnvironment is "Development".<br/>

@@ -1,12 +1,13 @@
 using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
+using AspNetCore.Boilerplate;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace AspNetCore.Boilerplate.Api.ExceptionHandler;
+namespace Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
 
 public class AspExceptionHandler : IExceptionHandler
 {

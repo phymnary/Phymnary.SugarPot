@@ -1,7 +1,7 @@
 using AspNetCore.Boilerplate.Domain;
 using FluentValidation;
 
-namespace AspNetCore.Boilerplate.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 public static class RuleBuilderExtensions
 {

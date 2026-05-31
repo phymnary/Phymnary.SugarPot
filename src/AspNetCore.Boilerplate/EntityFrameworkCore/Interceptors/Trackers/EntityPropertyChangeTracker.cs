@@ -1,14 +1,15 @@
 using System.Text.Json;
 using AspNetCore.Boilerplate.Domain;
 using AspNetCore.Boilerplate.Domain.Auditing;
-using AspNetCore.Boilerplate.EntityFrameworkCore.Extensions;
 using AspNetCore.Boilerplate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Interceptors.Trackers;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors.Trackers;
 
 public class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
     TAuditDbContext auditDbContext,

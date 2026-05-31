@@ -1,13 +1,13 @@
-using AspNetCore.Boilerplate.Api;
-using AspNetCore.Boilerplate.Api.ExceptionHandler;
-using AspNetCore.Boilerplate.EntityFrameworkCore;
-using AspNetCore.Boilerplate.EntityFrameworkCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Phymnary.SugarPot.AspNetCore.Api;
+using Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
 
-namespace AspNetCore.Boilerplate.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 public static class ServiceCollectionExtensions
 {

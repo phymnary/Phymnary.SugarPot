@@ -3,7 +3,7 @@ using AspNetCore.Boilerplate.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace AspNetCore.Boilerplate.EntityFrameworkCore.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
 
 public static class QueryableExtensions
 {

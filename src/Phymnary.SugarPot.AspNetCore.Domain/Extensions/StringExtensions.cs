@@ -12,12 +12,10 @@ public static partial class StringExtensions
 
     public static string[] SplitBySemicolon(this string value)
     {
-        return
-        [
-            .. value
-                .Split(";", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-                .Select(it => it.Trim()),
-        ];
+        return value.Split(
+            ";",
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+        );
     }
 
     public static bool IsBlank([NotNullWhen(false)] this string? value)

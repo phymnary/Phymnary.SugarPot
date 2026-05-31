@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public interface IAppSettingsSection
 {

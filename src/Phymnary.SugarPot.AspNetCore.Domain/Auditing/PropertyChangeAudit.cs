@@ -1,4 +1,4 @@
-namespace AspNetCore.Boilerplate.Domain.Auditing;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Auditing;
 
 public abstract class PropertyChangeAudit
 {
