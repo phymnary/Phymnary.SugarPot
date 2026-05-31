@@ -1,0 +1,19 @@
+<Solution>
+	<Folder Name="/Solution Items/">
+		<File Path="Directory.Build.props" />
+		<File Path="Directory.Packages.props" />
+	</Folder>
+	<Folder Name="/src/">
+		<Project Path="src/AspNetCore.Boilerplate/AspNetCore.Boilerplate.csproj" />
+		<Project Path="src/Phymnary.SugarPot.DependencyInjection/Phymnary.SugarPot.DependencyInjection.csproj" />
+		<Project Path="src/Phymnary.SugarPot.RoslynComponents/Phymnary.SugarPot.RoslynComponents.csproj" />
+	</Folder>
+	<Folder Name="/src/roslyn/">
+		<File Path="src/roslyn/Directory.Build.props" />
+		<Project Path="src/roslyn/AspNetCore.Boilerplate.Roslyn/AspNetCore.Boilerplate.Roslyn.csproj" />
+		<Project Path="src/roslyn/Phymnary.SugarPot.DependencyInjection.Roslyn/Phymnary.SugarPot.DependencyInjection.Roslyn.csproj" />
+	</Folder>
+	<Folder Name="/test/">
+		<Project Path="test/Phymnary.SugarPot.DependencyInjection.Roslyn.Tests/Phymnary.SugarPot.DependencyInjection.Roslyn.Tests.csproj" />
+	</Folder>
+</Solution>
