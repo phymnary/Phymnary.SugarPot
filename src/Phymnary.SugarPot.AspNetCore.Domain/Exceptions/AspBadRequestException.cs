@@ -1,8 +1,8 @@
 using System.Net;
 
-namespace Phymnary.SugarPot.AspNetCore;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
 
-public class AspBadRequestException(string message) : Exception(message), IAspException
+public class AspBadRequestException(string message) : Exception(message), IDomainException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
 

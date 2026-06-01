@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.Domain.Pagination;
+using Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
+using Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
 
 namespace Phymnary.SugarPot.AspNetCore.Domain;
 
@@ -84,9 +85,10 @@ public interface IRepository<TEntity>
         CancellationToken cancellationToken = default
     );
 
-    IPaginateOrderBuilding<TEntity> Paginate(
+    IAdvanceOrderBuilding<TEntity> AdvanceQuery(
         Func<IQueryable<TEntity>, IQueryable<TEntity>>? filter = null,
         bool? canIncludeDetails = null
     );
+
     void Delete(TEntity entity);
 }

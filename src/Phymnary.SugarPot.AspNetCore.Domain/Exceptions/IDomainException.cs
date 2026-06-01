@@ -1,8 +1,8 @@
 using System.Net;
 
-namespace Phymnary.SugarPot.AspNetCore;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
 
-public interface IAspException
+public interface IDomainException
 {
     HttpStatusCode StatusCode { get; }
 

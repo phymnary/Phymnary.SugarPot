@@ -2,7 +2,6 @@
 
 ### New Rules
 
-| Rule ID  | Category               | Severity | Notes                           |
-|----------|------------------------|----------|---------------------------------|
-| ASPB0001 | AspNetCore.Boilerplate | Error    | ASPB0001_AspNetCore.Boilerplate |
-| ASPB0002 | AspNetCore.Boilerplate | Error    | ASPB0002_AspNetCore.Boilerplate |
+| Rule ID  | Category                     | Severity | Notes                        |
+|----------|------------------------------|----------|------------------------------|
+| SPDI0001 | SugarPot.DependencyInjection | Error    | SPDI0001_DependencyInjection |

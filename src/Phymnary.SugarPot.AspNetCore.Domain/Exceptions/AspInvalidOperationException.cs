@@ -1,10 +1,10 @@
 using System.Net;
 
-namespace Phymnary.SugarPot.AspNetCore;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
 
 public class AspInvalidOperationException(string message)
     : InvalidOperationException(message),
-        IAspException
+        IDomainException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.UnprocessableEntity;
 

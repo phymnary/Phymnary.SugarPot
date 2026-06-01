@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
 
 namespace Phymnary.SugarPot.AspNetCore.Domain.Extensions;
 

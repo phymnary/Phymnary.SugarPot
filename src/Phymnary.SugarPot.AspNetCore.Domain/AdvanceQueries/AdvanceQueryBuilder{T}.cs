@@ -1,27 +1,27 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.Domain.Pagination;
+using Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Pagination;
+namespace Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
 
-public static class PaginateQueryBuilderExtensions
+public static class AdvanceQueryBuilderExtensions
 {
-    public static IPaginateStructure<T> AsNoTracking<T>(this IPaginateStructure<T> builder)
+    public static IAdvanceQueryBuilder<T> AsNoTracking<T>(this IAdvanceQueryBuilder<T> builder)
         where T : class
     {
         return builder.BuildUp(queryable => queryable.AsNoTracking());
     }
 }
 
-internal class PaginateQueryBuilder<T>(
+internal class AdvanceQueryBuilder<T>(
     Func<CancellationToken, Task<int>> countFunc,
     IQueryable<T> queryable,
     Func<CancellationToken, CancellationToken> getRequestAborted
-) : IPaginateOrderBuilding<T>, IPaginatePageBuilding<T>, IPaginateStructure<T>
+) : IAdvanceOrderBuilding<T>, IAdvancePageBuilding<T>, IAdvanceQueryBuilder<T>
 {
     private IQueryable<T> _queryable = queryable;
 
-    public IPaginatePageBuilding<T> OrderBy<TProperty>(
+    public IAdvancePageBuilding<T> OrderBy<TProperty>(
         Expression<Func<T, TProperty>> propertyAccessor
     )
     {
@@ -29,7 +29,7 @@ internal class PaginateQueryBuilder<T>(
         return this;
     }
 
-    public IPaginatePageBuilding<T> OrderByDescending<TProperty>(
+    public IAdvancePageBuilding<T> OrderByDescending<TProperty>(
         Expression<Func<T, TProperty>> propertyAccessor
     )
     {
@@ -37,7 +37,7 @@ internal class PaginateQueryBuilder<T>(
         return this;
     }
 
-    public IPaginateStructure<T> Pick(int perPage, int pageIndex = 0)
+    public IAdvanceQueryBuilder<T> Pick(int perPage, int pageIndex = 0)
     {
         if (pageIndex > 0)
             _queryable = _queryable.Skip((pageIndex - 1) * perPage);
@@ -48,9 +48,9 @@ internal class PaginateQueryBuilder<T>(
         return this;
     }
 
-    public IPaginateStructure<TTarget> Select<TTarget>(Expression<Func<T, TTarget>> selector)
+    public IAdvanceQueryBuilder<TTarget> Select<TTarget>(Expression<Func<T, TTarget>> selector)
     {
-        return new PaginateQueryBuilder<TTarget>(
+        return new AdvanceQueryBuilder<TTarget>(
             countFunc,
             _queryable.Select(selector),
             getRequestAborted
@@ -68,7 +68,7 @@ internal class PaginateQueryBuilder<T>(
         };
     }
 
-    public IPaginateStructure<T> BuildUp(Func<IQueryable<T>, IQueryable<T>> manipulate)
+    public IAdvanceQueryBuilder<T> BuildUp(Func<IQueryable<T>, IQueryable<T>> manipulate)
     {
         _queryable = manipulate(_queryable);
         return this;
@@ -80,16 +80,16 @@ internal class PaginateQueryBuilder<T>(
     }
 }
 
-public interface IPaginateOrderBuilding<T>
+public interface IAdvanceOrderBuilding<T>
 {
-    IPaginatePageBuilding<T> OrderBy<TProperty>(Expression<Func<T, TProperty>> propertyAccessor);
+    IAdvancePageBuilding<T> OrderBy<TProperty>(Expression<Func<T, TProperty>> propertyAccessor);
 
-    IPaginatePageBuilding<T> OrderByDescending<TProperty>(
+    IAdvancePageBuilding<T> OrderByDescending<TProperty>(
         Expression<Func<T, TProperty>> propertyAccessor
     );
 }
 
-public interface IPaginatePageBuilding<T>
+public interface IAdvancePageBuilding<T>
 {
     /// <summary>
     /// Set limit and offset of query
@@ -97,14 +97,14 @@ public interface IPaginatePageBuilding<T>
     /// <param name="perPage">Number of rows returning. If this equals int.MaxValue, will not invoke Take</param>
     /// <param name="pageIndex">Index start from 1 to match UI page index. If this equals 0, will not invoke Skip.</param>
     /// <returns></returns>
-    IPaginateStructure<T> Pick(int perPage, int pageIndex = 0);
+    IAdvanceQueryBuilder<T> Pick(int perPage, int pageIndex = 0);
 }
 
-public interface IPaginateStructure<T>
+public interface IAdvanceQueryBuilder<T>
 {
-    internal IPaginateStructure<T> BuildUp(Func<IQueryable<T>, IQueryable<T>> control);
+    internal IAdvanceQueryBuilder<T> BuildUp(Func<IQueryable<T>, IQueryable<T>> control);
 
-    IPaginateStructure<TTarget> Select<TTarget>(Expression<Func<T, TTarget>> selector);
+    IAdvanceQueryBuilder<TTarget> Select<TTarget>(Expression<Func<T, TTarget>> selector);
 
     Task<PaginateResult<T>> CountAndBuildAsync(CancellationToken cancellationToken = default);
 

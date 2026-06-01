@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Auditing;
 
 public interface IAuditable
 {

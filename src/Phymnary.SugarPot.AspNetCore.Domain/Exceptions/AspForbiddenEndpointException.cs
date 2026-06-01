@@ -1,8 +1,8 @@
 using System.Net;
 
-namespace Phymnary.SugarPot.AspNetCore;
+namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
 
-public class AspForbiddenEndpointException(string message) : Exception(message), IAspException
+public class AspForbiddenEndpointException(string message) : Exception(message), IDomainException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.Forbidden;
 

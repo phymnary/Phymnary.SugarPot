@@ -1,8 +1,12 @@
-using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Phymnary.SugarPot.AspNetCore.Domain;
 
-public interface IEntity;
+public interface IEntity
+{
+    [NotMapped]
+    EntityDomainStatus DomainStatus { get; }
+}
 
 public interface IEntity<out TKey> : IEntity
     where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
@@ -21,4 +25,7 @@ public abstract class Entity<TKey> : IEntity<TKey>
     }
 
     public TKey Id { get; protected init; } = default!;
+
+    [NotMapped]
+    public EntityDomainStatus DomainStatus { get; } = new();
 }
