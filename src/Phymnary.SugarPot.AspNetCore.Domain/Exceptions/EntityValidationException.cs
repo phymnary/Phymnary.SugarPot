@@ -1,7 +1,7 @@
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
+using Phymnary.SugarPot.AspNetCore.Entities;
 using System.Net;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
+namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
 public class EntityValidationException(string message) : Exception(message), IDomainException
 {

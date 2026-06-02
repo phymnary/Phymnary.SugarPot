@@ -1,4 +1,4 @@
-﻿namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
+﻿namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
 public static class DomainErrorCodeRegistry
 {

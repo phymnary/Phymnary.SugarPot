@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
-using Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
-using Phymnary.SugarPot.AspNetCore.Domain.Repositories;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Exceptions;
+using Phymnary.SugarPot.AspNetCore.Repositories;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 public static class RepositoryExtensions
 {

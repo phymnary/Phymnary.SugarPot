@@ -1,4 +1,4 @@
-﻿namespace Phymnary.SugarPot.AspNetCore.Domain.Entities;
+﻿namespace Phymnary.SugarPot.AspNetCore.Entities;
 
 public class EntityDomainStatus
 {

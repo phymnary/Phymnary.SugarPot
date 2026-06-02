@@ -1,13 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using Phymnary.SugarPot.AspNetCore.Auditings;
 using Phymnary.SugarPot.AspNetCore.Domain.Auditing;
 using Phymnary.SugarPot.AspNetCore.Domain.Auditings;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors.Trackers;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Interceptors;
+using Phymnary.SugarPot.AspNetCore.Interceptors.Trackers;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public class EfServicesConfigurator<TDbContext>
     where TDbContext : DbContext

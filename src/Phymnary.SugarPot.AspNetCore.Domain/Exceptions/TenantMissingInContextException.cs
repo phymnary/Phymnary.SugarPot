@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
+namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
 public class TenantMissingInContextException(string message) : Exception(message), IDomainException
 {

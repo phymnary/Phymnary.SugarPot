@@ -1,7 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq.Expressions;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Entities;
+namespace Phymnary.SugarPot.AspNetCore.Entities;
 
 public interface IEntity
 {
@@ -25,8 +25,8 @@ public abstract class Entity<TKey> : IEntity<TKey>
         Id = id;
     }
 
+    [Key]
     public TKey Id { get; protected init; } = default!;
 
-    [NotMapped]
     public EntityDomainStatus DomainStatus { get; } = new();
 }

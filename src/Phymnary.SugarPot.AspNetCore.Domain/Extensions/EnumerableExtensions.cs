@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 public static class EnumerableExtensions
 {

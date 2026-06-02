@@ -1,13 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Phymnary.SugarPot.AspNetCore.Domain;
-using Phymnary.SugarPot.AspNetCore.Domain.Auditings;
-using Phymnary.SugarPot.AspNetCore.Domain.Security;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors.Trackers;
+using Phymnary.SugarPot.AspNetCore.Auditings;
+using Phymnary.SugarPot.AspNetCore.Extensions;
+using Phymnary.SugarPot.AspNetCore.Interceptors.Trackers;
+using Phymnary.SugarPot.AspNetCore.Security;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors;
+namespace Phymnary.SugarPot.AspNetCore.Interceptors;
 
 public class AuditOnSavingInterceptor(
     ICurrentUser currentUser,

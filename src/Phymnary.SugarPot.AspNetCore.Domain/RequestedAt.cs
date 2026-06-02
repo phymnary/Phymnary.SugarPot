@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public interface IRequestedAt
 {

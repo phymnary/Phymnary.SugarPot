@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
 public abstract class EfRepository<TDbContext, TEntity>(
     TDbContext dbContext,

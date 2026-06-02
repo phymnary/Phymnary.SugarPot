@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Auditings;
+namespace Phymnary.SugarPot.AspNetCore.Auditings;
 
 public class PropertyAuditing
 {

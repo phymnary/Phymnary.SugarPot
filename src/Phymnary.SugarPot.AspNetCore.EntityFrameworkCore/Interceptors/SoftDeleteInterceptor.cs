@@ -1,9 +1,8 @@
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Phymnary.SugarPot.AspNetCore.Domain;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
-using Phymnary.SugarPot.AspNetCore.Domain.Security;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Security;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Interceptors;
+namespace Phymnary.SugarPot.AspNetCore.Interceptors;
 
 public class SoftDeleteInterceptor(ICurrentUser currentUser, IRequestedAt requestedAt)
     : SaveChangesInterceptor

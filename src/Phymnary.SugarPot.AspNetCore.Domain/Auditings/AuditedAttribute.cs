@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain.Auditings;
+namespace Phymnary.SugarPot.AspNetCore.Auditings;
 
 /// <summary>
 /// Specific what properties need to be audited of target class

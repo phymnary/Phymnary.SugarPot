@@ -2,10 +2,10 @@ using System.Collections.Immutable;
 using System.Reflection;
 using AspNetCore.Boilerplate.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
-using Phymnary.SugarPot.AspNetCore.Domain.Extensions;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Extensions;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Auditings;
+namespace Phymnary.SugarPot.AspNetCore.Auditings;
 
 public class AuditingMetadata
 {

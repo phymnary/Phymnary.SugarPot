@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Entities;
+namespace Phymnary.SugarPot.AspNetCore.Entities;
 
 public interface IEntityValidator<TEntity>
     where TEntity : class, IEntity

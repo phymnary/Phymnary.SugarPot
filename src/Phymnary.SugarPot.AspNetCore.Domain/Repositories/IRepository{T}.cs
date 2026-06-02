@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
-using Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
+using Phymnary.SugarPot.AspNetCore.AdvanceQueries;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Exceptions;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
 public interface IRepository<TEntity>
     where TEntity : class, IEntity

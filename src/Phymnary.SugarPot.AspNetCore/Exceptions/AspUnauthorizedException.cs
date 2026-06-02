@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
+namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
 public class AspUnauthorizedException(string message) : Exception(message), IDomainException
 {

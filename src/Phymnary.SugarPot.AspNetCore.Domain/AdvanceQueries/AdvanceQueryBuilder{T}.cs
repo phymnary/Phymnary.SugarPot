@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
+using Phymnary.SugarPot.AspNetCore.AdvanceQueries;
 
-namespace Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
+namespace Phymnary.SugarPot.AspNetCore.AdvanceQueries;
 
 public static class AdvanceQueryBuilderExtensions
 {

@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
+using Phymnary.SugarPot.AspNetCore.Entities;
 using System.Linq.Expressions;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
+namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
 public static class QueryableExtensions
 {

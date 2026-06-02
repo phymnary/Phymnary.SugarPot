@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain.Auditings;
+namespace Phymnary.SugarPot.AspNetCore.Auditings;
 
 public interface IPropertyChangeAudit
 {

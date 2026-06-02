@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Phymnary.SugarPot.AspNetCore.Domain.Entities;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Extensions;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Extensions;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public class ModelBuilderHelper(
     ModelBuilder builder,

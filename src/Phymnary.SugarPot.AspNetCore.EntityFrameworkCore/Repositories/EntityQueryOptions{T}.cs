@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
+namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
 public class EntityQueryOptions<TEntity>
     where TEntity : IEntity

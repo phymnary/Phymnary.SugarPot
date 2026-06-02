@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore;
 
 internal sealed class WrappedDbContextTransaction(
     IDbContextTransaction transaction,

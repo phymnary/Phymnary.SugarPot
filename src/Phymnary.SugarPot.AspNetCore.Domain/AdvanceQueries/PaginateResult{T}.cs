@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain.AdvanceQueries;
+namespace Phymnary.SugarPot.AspNetCore.AdvanceQueries;
 
 public class PaginateResult<TEntity>
 {

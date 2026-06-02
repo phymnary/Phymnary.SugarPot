@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
+namespace Phymnary.SugarPot.AspNetCore;
 
 public interface IAbortedToken
 {

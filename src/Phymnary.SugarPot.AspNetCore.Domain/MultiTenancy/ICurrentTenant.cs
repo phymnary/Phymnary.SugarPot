@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain.MultiTenancy;
+namespace Phymnary.SugarPot.AspNetCore.MultiTenancy;
 
 public interface ICurrentTenant
 {

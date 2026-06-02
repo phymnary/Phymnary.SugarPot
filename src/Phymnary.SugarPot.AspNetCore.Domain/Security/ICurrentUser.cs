@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Domain.Security;
+namespace Phymnary.SugarPot.AspNetCore.Security;
 
 public interface ICurrentUser
 {
