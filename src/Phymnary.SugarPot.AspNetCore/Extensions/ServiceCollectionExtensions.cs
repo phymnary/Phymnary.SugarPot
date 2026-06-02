@@ -4,8 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Phymnary.SugarPot.AspNetCore.Api;
 using Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Repositories;
 
 namespace Phymnary.SugarPot.AspNetCore.Extensions;
 

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Phymnary.SugarPot.AspNetCore.Domain\Phymnary.SugarPot.AspNetCore.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

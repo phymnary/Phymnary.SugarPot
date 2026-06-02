@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 
 namespace Phymnary.SugarPot.AspNetCore.Api.Extensions;
 

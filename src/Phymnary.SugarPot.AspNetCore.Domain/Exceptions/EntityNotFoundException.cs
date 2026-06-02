@@ -7,7 +7,7 @@ public class EntityNotFoundException(string message) : Exception(message), IDoma
     public HttpStatusCode StatusCode => HttpStatusCode.NotFound;
 
     public string? ErrorCode { get; private set; } =
-        DomainErrorCodeRegister.DefaultEntityNotFoundErrorCode;
+        DomainErrorCodeRegistry.DefaultEntityNotFoundErrorCode;
 
     public EntityNotFoundException WithErrorCode(string code)
     {

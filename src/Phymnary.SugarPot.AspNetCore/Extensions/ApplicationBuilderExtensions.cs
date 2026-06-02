@@ -2,9 +2,7 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Phymnary.SugarPot.AspNetCore;
 using Phymnary.SugarPot.AspNetCore.Api;
-using Phymnary.SugarPot.AspNetCore.EntityFrameworkCore;
 using Phymnary.SugarPot.DependencyInjection;
 
 namespace Phymnary.SugarPot.AspNetCore.Extensions;

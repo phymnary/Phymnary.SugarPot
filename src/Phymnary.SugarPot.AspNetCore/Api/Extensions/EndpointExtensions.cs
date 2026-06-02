@@ -1,6 +1,3 @@
-using AspNetCore.Boilerplate.Extensions;
-using Phymnary.SugarPot.AspNetCore.Api;
-
 namespace Phymnary.SugarPot.AspNetCore.Api.Extensions;
 
 public static class EndpointExtensions

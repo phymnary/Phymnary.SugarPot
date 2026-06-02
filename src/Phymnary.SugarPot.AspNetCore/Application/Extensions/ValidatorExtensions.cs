@@ -1,5 +1,3 @@
-using AspNetCore.Boilerplate;
-using AspNetCore.Boilerplate.Api.ExceptionHandler;
 using FluentValidation;
 
 namespace Phymnary.SugarPot.AspNetCore.Application.Extensions;

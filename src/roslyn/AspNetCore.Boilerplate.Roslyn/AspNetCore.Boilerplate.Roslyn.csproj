@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Phymnary.SugarPot.RoslynComponents\Phymnary.SugarPot.RoslynComponents.csproj" />
+    <ProjectReference Include="..\..\shared\Phymnary.SugarPot.RoslynComponents\Phymnary.SugarPot.RoslynComponents.csproj" />
   </ItemGroup>
 
 </Project>

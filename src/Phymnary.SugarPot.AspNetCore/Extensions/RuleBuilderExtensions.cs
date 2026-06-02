@@ -1,4 +1,3 @@
-using AspNetCore.Boilerplate.Domain;
 using FluentValidation;
 
 namespace Phymnary.SugarPot.AspNetCore.Extensions;
