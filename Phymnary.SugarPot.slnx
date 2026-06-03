@@ -21,6 +21,7 @@
 		<Project Path="src/shared/Phymnary.SugarPot.RoslynComponents/Phymnary.SugarPot.RoslynComponents.csproj" />
 	</Folder>
 	<Folder Name="/test/">
+		<Project Path="test/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Tests/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Tests.csproj" Id="f8575ec1-ee1b-464c-87c3-dad41619ba52" />
 		<Project Path="test/Phymnary.SugarPot.DependencyInjection.Roslyn.Tests/Phymnary.SugarPot.DependencyInjection.Roslyn.Tests.csproj" />
 	</Folder>
 </Solution>

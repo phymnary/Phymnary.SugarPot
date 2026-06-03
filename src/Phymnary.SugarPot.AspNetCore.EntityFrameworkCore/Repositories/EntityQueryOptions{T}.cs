@@ -1,3 +1,5 @@
+using Phymnary.SugarPot.AspNetCore.Entities;
+
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
 public class EntityQueryOptions<TEntity>

@@ -1,13 +1,19 @@
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
+using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Exceptions;
+using Phymnary.SugarPot.AspNetCore.Extensions;
+using Phymnary.SugarPot.AspNetCore.Repositories.AdvanceQueries;
 
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
-public abstract class EfRepository<TDbContext, TEntity>(
+public abstract class EfRepository<TDbContext, TEntity, TKey>(
     TDbContext dbContext,
-    EfRepositoryAddons addons,
-    IRepositoryOptions<TEntity> options
-) : IRepository<TEntity>
-    where TEntity : class, IEntity
+    IRepositoryOptions<TEntity> options,
+    EfRepositoryAddons addons
+) : IRepository<TEntity, TKey>
+    where TEntity : class, IEntity, IHasKey<TKey>
+    where TKey : notnull
     where TDbContext : DbContext
 {
     public DbSet<TEntity> DbSet { get; } = dbContext.Set<TEntity>();
@@ -25,13 +31,26 @@ public abstract class EfRepository<TDbContext, TEntity>(
         return addons.AbortedProvider.Get(cancellationToken);
     }
 
-    private Task ValidateAsync(TEntity entity, CancellationToken ct)
+    private async ValueTask ValidateAsync(TEntity entity, CancellationToken ct)
     {
-        return options.Validator?.ValidateAndThrowOnErrorsAsync(
-                entity,
-                $"Fail when validate {typeof(TEntity).Name}",
-                ct
-            ) ?? Task.CompletedTask;
+        if (options.Validator is null)
+            return;
+
+        var result = await options.Validator.ValidateAsync(entity, ct);
+        if (!result.IsValid)
+            throw new EntityValidationException(
+                $"Entity {typeof(TEntity).Name} with Id {entity.GetKey()} failed validation"
+            )
+            {
+                Failures =
+                [
+                    .. result.Errors.Select(e => new EntityValidationFailureDetail()
+                    {
+                        Property = e.PropertyName,
+                        Message = e.ErrorMessage,
+                    }),
+                ],
+            };
     }
 
     public async Task<TEntity> InsertAsync(
@@ -43,6 +62,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         var ct = GetRequestAborted(cancellationToken);
 
         await ValidateAsync(entity, ct);
+
         var inserted = DbSet.Add(entity).Entity;
 
         if (autoSave)
@@ -65,7 +85,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         if (upsert is not null)
         {
             if (_updateOptions.Update is null)
-                throw new AspInvalidOperationException(
+                throw new DomainNotImplementationException(
                     "Must provide update function in EfUpdateOptions"
                 );
             _updateOptions.Update(entity, upsert);
@@ -94,6 +114,20 @@ public abstract class EfRepository<TDbContext, TEntity>(
         return await dbContext.SaveChangesAsync(ct);
     }
 
+    public async Task<TEntity> GetAsync(
+        TKey id,
+        bool canIncludeDetails = false,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var ct = GetRequestAborted(cancellationToken);
+        return await Queryable(canIncludeDetails)
+                .FirstOrDefaultAsync(e => e.GetKey().Equals(id), ct)
+            ?? throw new EntityNotFoundException(
+                $"Entity {typeof(TEntity).Name} with Id {id} was not found"
+            );
+    }
+
     public async Task<TEntity?> FindAsync(
         Expression<Func<TEntity, bool>> predicate,
         bool canIncludeDetails = false,
@@ -115,19 +149,6 @@ public abstract class EfRepository<TDbContext, TEntity>(
             return await Queryable(canIncludeDetails).ToListAsync(ct);
 
         return await Queryable(canIncludeDetails).Where(predicate).ToListAsync(ct);
-    }
-
-    public async Task<TSelect[]> SelectWhereAsync<TSelect>(
-        Expression<Func<TEntity, TSelect>> selector,
-        Expression<Func<TEntity, bool>>? predicate = null,
-        CancellationToken cancellationToken = default
-    )
-    {
-        var ct = GetRequestAborted(cancellationToken);
-        if (predicate is null)
-            return await DbSet.Select(selector).ToArrayAsync(ct);
-
-        return await DbSet.Where(predicate).Select(selector).ToArrayAsync(ct);
     }
 
     public async Task<bool> AnyAsync(CancellationToken cancellationToken = default)
@@ -160,7 +181,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         return await DbSet.CountAsync(predicate, ct);
     }
 
-    public IPaginateOrderBuilding<TEntity> Paginate(
+    public IAdvanceOrderBuilding<TEntity> AdvanceQuery(
         Func<IQueryable<TEntity>, IQueryable<TEntity>>? filter = null,
         bool? canIncludeDetails = null
     )
@@ -168,7 +189,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         var dbSet = canIncludeDetails is { } include ? Queryable(include) : DbSet;
         var queryable = filter is not null ? filter(dbSet) : dbSet;
 
-        return new PaginateQueryBuilder<TEntity>(
+        return new AdvanceQueryBuilder<TEntity>(
             cancellationToken => queryable.CountAsync(cancellationToken),
             queryable,
             GetRequestAborted
@@ -186,14 +207,14 @@ public abstract class EfRepository<TDbContext, TEntity>(
 
     public void Delete(TEntity entity)
     {
-        if (_updateOptions.OnDelete is not null)
+        if (_updateOptions.OnDelete?.Invoke(entity) is true)
         {
-            _updateOptions.OnDelete(entity);
+            return;
         }
 
         if (entity is ISoftDelete softDelete)
         {
-            softDelete.SoftDeleted();
+            softDelete.Delete();
         }
         else
         {

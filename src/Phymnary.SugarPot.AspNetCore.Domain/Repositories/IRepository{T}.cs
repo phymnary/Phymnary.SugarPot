@@ -1,19 +1,15 @@
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using Phymnary.SugarPot.AspNetCore.AdvanceQueries;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Exceptions;
+using Phymnary.SugarPot.AspNetCore.Repositories.AdvanceQueries;
 
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
-public interface IRepository<TEntity>
-    where TEntity : class, IEntity
+public interface IRepository<TEntity, TKey>
+    where TEntity : class, IEntity, IHasKey<TKey>
+    where TKey : notnull
 {
-    internal DbSet<TEntity> DbSet { get; }
-
-    internal CancellationToken GetRequestAborted(CancellationToken cancellationToken);
-
-    internal IQueryable<TEntity> Queryable(bool canIncludeDetails = false);
+    CancellationToken GetRequestAborted(CancellationToken cancellationToken);
 
     /// <summary>
     /// Insert entity to database context
@@ -54,9 +50,9 @@ public interface IRepository<TEntity>
     /// <exception cref="EntityValidationException">Throw by validator.</exception>
     Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
 
-    Task<TSelect[]> SelectWhereAsync<TSelect>(
-        Expression<Func<TEntity, TSelect>> selector,
-        Expression<Func<TEntity, bool>>? predicate = null,
+    Task<TEntity> GetAsync(
+        TKey key,
+        bool canIncludeDetails = false,
         CancellationToken cancellationToken = default
     );
 

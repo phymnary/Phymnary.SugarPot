@@ -1,19 +1,21 @@
 using System.Collections.Immutable;
 using System.Reflection;
-using AspNetCore.Boilerplate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Extensions;
 
 namespace Phymnary.SugarPot.AspNetCore.Auditings;
 
-public class AuditingMetadata
+public class EfAuditingStructure
 {
-    private readonly Dictionary<Type, PropertyAuditing> _cachePropertyAuditing = [];
+    private readonly Dictionary<
+        Type,
+        EntityPropertyAuditingMetadata
+    > _cachePropertyAuditingMetadata = [];
+
+    public TrackBy TrackBy { internal get; set; }
 
     internal bool HasDifferentDbContextForAuditChanges { get; set; }
-
-    public TrackBy TrackBy { get; set; }
 
     private static IEnumerable<string> GetDisabledAuditPropertyNames(
         IEnumerable<PropertyInfo> propertyInfos,
@@ -56,12 +58,12 @@ public class AuditingMetadata
         }
     }
 
-    internal PropertyAuditing GetPropertyAuditing(Type entityType)
+    internal EntityPropertyAuditingMetadata GetPropertyAuditing(Type entityType)
     {
-        if (_cachePropertyAuditing.TryGetValue(entityType, out var value))
+        if (_cachePropertyAuditingMetadata.TryGetValue(entityType, out var value))
             return value;
 
-        value = new PropertyAuditing
+        value = new EntityPropertyAuditingMetadata
         {
             IsAuditEnabled = !entityType.HasAttribute<DisableAuditingAttribute>(),
             ValidAuditProperties =
@@ -78,7 +80,7 @@ public class AuditingMetadata
             ],
         };
 
-        _cachePropertyAuditing[entityType] = value;
+        _cachePropertyAuditingMetadata[entityType] = value;
 
         return value;
     }

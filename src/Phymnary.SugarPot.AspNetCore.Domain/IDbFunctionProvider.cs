@@ -18,6 +18,4 @@ public interface IDbFunctionProvider
         Func<CancellationToken, Task<bool>> verifySucceeded,
         CancellationToken cancellationToken = default
     );
-
-    void ClearTracking();
 }

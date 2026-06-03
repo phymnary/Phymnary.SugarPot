@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
 using Phymnary.SugarPot.AspNetCore.Auditings;
-using Phymnary.SugarPot.AspNetCore.Domain.Auditing;
-using Phymnary.SugarPot.AspNetCore.Domain.Auditings;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Interceptors;
 using Phymnary.SugarPot.AspNetCore.Interceptors.Trackers;
@@ -17,40 +15,59 @@ public class EfServicesConfigurator<TDbContext>
 
     private bool _canAuditPropertyChange;
 
-    private readonly AuditingMetadata _auditingMetadata = new();
+    private readonly EfAuditingStructure _auditingMetadata = new();
+
+    private bool _canAudit;
+
+    private void RegisterAuditing()
+    {
+        if (_canAudit)
+            return;
+
+        _canAudit = true;
+        _services.AddScoped<IInterceptor, AuditOnSavingInterceptor>();
+    }
 
     internal EfServicesConfigurator(IServiceCollection services)
     {
-        services.AddScoped<SoftDeleteInterceptor>();
-
-        //if (EfFeatureFlags.IsMultiTenantEnable)
-        //    services.AddScoped<IInterceptor, SetTenantOnSavingInterceptor>();
-
-        //if (EfFeatureFlags.IsAuditingEnable)
-        //    services.AddScoped<IInterceptor, AuditOnSavingInterceptor>();
-
         _services = services;
     }
 
-    public EfServicesConfigurator<TDbContext> ConfigureAuditing(Action<AuditingMetadata> configure)
+    public EfServicesConfigurator<TDbContext> ConfigureAuditing(
+        Action<EfAuditingStructure> configure
+    )
     {
         configure(_auditingMetadata);
         return this;
     }
 
+    public EfServicesConfigurator<TDbContext> AddSoftDelete()
+    {
+        _services.AddScoped<IInterceptor, SoftDeleteInterceptor>();
+        return this;
+    }
+
+    public EfServicesConfigurator<TDbContext> AddMultiTenancy()
+    {
+        _services.AddScoped<IInterceptor, SetTenantOnSavingInterceptor>();
+        return this;
+    }
+
     public EfServicesConfigurator<TDbContext> AddPropertyChangeAudit<TAuditDbContext, TAudit>(
-        Func<PropertyChangeAudit, TAudit> mapper
+        Func<IPropertyChangeAudit, TAudit> mapper
     )
         where TAuditDbContext : DbContext
-        where TAudit : PropertyChangeAudit, IEntity
+        where TAudit : class, IPropertyChangeAudit, IEntity
     {
+        RegisterAuditing();
         _canAuditPropertyChange = true;
+
         _services
             .AddScoped<
                 IEntityPropertyChangeTracker,
                 EntityPropertyChangeTracker<TAuditDbContext, TAudit>
             >()
-            .AddSingleton(new AuditingEntityMapper<PropertyChangeAudit, TAudit> { Map = mapper });
+            .AddSingleton(new AuditingEntityMapper<IPropertyChangeAudit, TAudit> { Map = mapper });
 
         _auditingMetadata.HasDifferentDbContextForAuditChanges =
             typeof(TAuditDbContext) != typeof(TDbContext);

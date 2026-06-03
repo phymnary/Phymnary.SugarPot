@@ -52,9 +52,4 @@ public class DbFunctionProvider<TDbContext>(TDbContext dbContext, IAbortedToken 
         );
         dbContext.ChangeTracker.AcceptAllChanges();
     }
-
-    public void ClearTracking()
-    {
-        dbContext.ChangeTracker.Clear();
-    }
 }

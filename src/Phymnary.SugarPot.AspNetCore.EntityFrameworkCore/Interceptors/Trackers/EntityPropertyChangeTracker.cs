@@ -1,6 +1,8 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Phymnary.SugarPot.AspNetCore.Auditings;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Extensions;
@@ -8,10 +10,10 @@ using Phymnary.SugarPot.AspNetCore.Security;
 
 namespace Phymnary.SugarPot.AspNetCore.Interceptors.Trackers;
 
-public class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
+internal class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
     TAuditDbContext auditDbContext,
     ICurrentUser currentUser,
-    AuditingMetadata auditingMetadata,
+    EfAuditingStructure auditingMetadata,
     AuditingEntityMapper<IPropertyChangeAudit, TAudit> mapper
 ) : IEntityPropertyChangeTracker
     where TAuditDbContext : DbContext
@@ -46,7 +48,7 @@ public class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
 
         public required DateTimeOffset ModifiedAt { get; init; }
 
-        public required PropertyAuditing PropertyAuditing { get; init; }
+        public required EntityPropertyAuditingMetadata Metadata { get; init; }
     }
 
     public async ValueTask TrackAsync(
@@ -72,7 +74,7 @@ public class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
                     _ => throw new NotSupportedException("Not support this TrackBy value"),
                 },
                 ModifiedAt = modifiedAt,
-                PropertyAuditing = metadata,
+                Metadata = metadata,
             },
             entry
         );
@@ -149,7 +151,7 @@ public class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
                             entry?.Properties.First(p => p.Metadata == it.Metadata).CurrentValue,
                         })
                         .Where(property =>
-                            context.PropertyAuditing.IsValid(ownedBy + property.Metadata.Name)
+                            context.Metadata.CanAudit(ownedBy + property.Metadata.Name)
                             && NotEquals(property.OriginalValue, property.CurrentValue)
                         )
                         .Select(property =>
@@ -172,7 +174,7 @@ public class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
             var propertyAudit in entry
                 .Properties.Where(property =>
                     property.IsModified
-                    && context.PropertyAuditing.IsValid(property.Metadata.Name)
+                    && context.Metadata.CanAudit(property.Metadata.Name)
                     && NotEquals(property.OriginalValue, property.CurrentValue)
                 )
                 .Select(property =>

@@ -1,9 +1,11 @@
+using Phymnary.SugarPot.AspNetCore.Entities;
+
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
 public class EntityUpdateOptions<TEntity>
-    where TEntity : class, IEntity
+    where TEntity : IEntity
 {
     public Action<TEntity, TEntity>? Update { get; init; }
 
-    public Action<TEntity>? OnDelete { get; init; }
+    public Func<TEntity, bool>? OnDelete { get; init; }
 }
