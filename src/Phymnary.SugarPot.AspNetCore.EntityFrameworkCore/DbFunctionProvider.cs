@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
+using Phymnary.SugarPot.AspNetCore.Repositories;
 
 namespace Phymnary.SugarPot.AspNetCore;
 
@@ -7,7 +7,7 @@ public class DbFunctionProvider<TDbContext>(TDbContext dbContext, IAbortedToken 
     : IDbFunctionProvider
     where TDbContext : DbContext
 {
-    public async Task<IDbContextTransaction> BeginTransactionAsync(
+    public async Task<IQueryTransaction> BeginTransactionAsync(
         CancellationToken cancellationToken = default
     )
     {
@@ -26,9 +26,7 @@ public class DbFunctionProvider<TDbContext>(TDbContext dbContext, IAbortedToken 
         await strategy.ExecuteAsync(
             async ct =>
             {
-                await using var transaction = await dbContext.Database.BeginTransactionAsync(ct);
                 await operation(ct);
-                await transaction.CommitAsync(ct);
             },
             ctProvider.Get(cancellationToken)
         );

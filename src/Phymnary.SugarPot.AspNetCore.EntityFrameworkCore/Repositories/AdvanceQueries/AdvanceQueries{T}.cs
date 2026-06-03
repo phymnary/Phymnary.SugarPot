@@ -7,7 +7,7 @@ internal class AdvanceQueryBuilder<T>(
     Func<CancellationToken, Task<int>> countFunc,
     IQueryable<T> queryable,
     Func<CancellationToken, CancellationToken> getRequestAborted
-) : IAdvanceOrderBuilding<T>, IAdvancePageBuilding<T>, IAdvanceQueryBuilder<T>
+) : IAdvanceOrderBuilding<T>, IAdvancePageBuilding<T>, IAdvanceSelectableBuilding<T>
 {
     private IQueryable<T> _queryable = queryable;
 
@@ -27,7 +27,7 @@ internal class AdvanceQueryBuilder<T>(
         return this;
     }
 
-    public IAdvanceQueryBuilder<T> Pick(int perPage, int pageIndex = 0)
+    public IAdvanceSelectableBuilding<T> Pick(int perPage, int pageIndex = 0)
     {
         if (pageIndex > 0)
             _queryable = _queryable.Skip((pageIndex - 1) * perPage);

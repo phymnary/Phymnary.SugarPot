@@ -1,12 +1,10 @@
-using Microsoft.EntityFrameworkCore.Storage;
+using Phymnary.SugarPot.AspNetCore.Repositories;
 
 namespace Phymnary.SugarPot.AspNetCore;
 
 public interface IDbFunctionProvider
 {
-    Task<IDbContextTransaction> BeginTransactionAsync(
-        CancellationToken cancellationToken = default
-    );
+    Task<IQueryTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
 
     Task UseResilientStrategyAsync(
         Func<CancellationToken, Task> operation,

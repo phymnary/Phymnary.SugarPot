@@ -2,7 +2,6 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Exceptions;
-using Phymnary.SugarPot.AspNetCore.Extensions;
 using Phymnary.SugarPot.AspNetCore.Repositories.AdvanceQueries;
 
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
@@ -46,8 +45,8 @@ public abstract class EfRepository<TDbContext, TEntity, TKey>(
                 [
                     .. result.Errors.Select(e => new EntityValidationFailureDetail()
                     {
-                        Property = e.PropertyName,
-                        Message = e.ErrorMessage,
+                        Property = e.Property,
+                        Message = e.Message,
                     }),
                 ],
             };
@@ -85,7 +84,7 @@ public abstract class EfRepository<TDbContext, TEntity, TKey>(
         if (upsert is not null)
         {
             if (_updateOptions.Update is null)
-                throw new DomainNotImplementationException(
+                throw new DomainNotImplementedException(
                     "Must provide update function in EfUpdateOptions"
                 );
             _updateOptions.Update(entity, upsert);

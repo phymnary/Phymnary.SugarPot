@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System.Collections.Frozen;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Phymnary.SugarPot.AspNetCore.Entities;
@@ -6,6 +6,9 @@ using Phymnary.SugarPot.AspNetCore.Extensions;
 
 namespace Phymnary.SugarPot.AspNetCore.Auditings;
 
+/// <summary>
+/// Singleton service to store the auditing structure of application. It also caches the auditing metadata for each entity type.
+/// </summary>
 public class EfAuditingStructure
 {
     private readonly Dictionary<
@@ -58,7 +61,9 @@ public class EfAuditingStructure
         }
     }
 
-    internal EntityPropertyAuditingMetadata GetPropertyAuditing(Type entityType)
+    private static readonly FrozenSet<string> EmptyFrozenSet = FrozenSet.ToFrozenSet<string>([]);
+
+    internal EntityPropertyAuditingMetadata GetPropertyAuditingMetadata(Type entityType)
     {
         if (_cachePropertyAuditingMetadata.TryGetValue(entityType, out var value))
             return value;
@@ -67,17 +72,16 @@ public class EfAuditingStructure
         {
             IsAuditEnabled = !entityType.HasAttribute<DisableAuditingAttribute>(),
             ValidAuditProperties =
-                entityType.GetCustomAttribute<AuditedAttribute>()?.Properties.ToImmutableHashSet()
-                ?? [],
-            IgnoreAuditProperties =
-            [
+                entityType.GetCustomAttribute<AuditedAttribute>()?.Properties.ToFrozenSet()
+                ?? EmptyFrozenSet,
+            IgnoreAuditProperties = FrozenSet.ToFrozenSet([
                 "CreatedAt",
                 "CreatedById",
                 "UpdatedAt",
                 "UpdatedById",
                 "TenantId",
                 .. GetDisabledAuditPropertyNames(entityType.GetProperties()),
-            ],
+            ]),
         };
 
         _cachePropertyAuditingMetadata[entityType] = value;

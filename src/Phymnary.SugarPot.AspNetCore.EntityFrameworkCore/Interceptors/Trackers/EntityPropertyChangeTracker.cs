@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Phymnary.SugarPot.AspNetCore.Auditings;
 using Phymnary.SugarPot.AspNetCore.Entities;
+using Phymnary.SugarPot.AspNetCore.Exceptions;
 using Phymnary.SugarPot.AspNetCore.Extensions;
 using Phymnary.SugarPot.AspNetCore.Security;
 
@@ -13,7 +14,7 @@ namespace Phymnary.SugarPot.AspNetCore.Interceptors.Trackers;
 internal class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
     TAuditDbContext auditDbContext,
     ICurrentUser currentUser,
-    EfAuditingStructure auditingMetadata,
+    EfAuditingStructure structure,
     AuditingEntityMapper<IPropertyChangeAudit, TAudit> mapper
 ) : IEntityPropertyChangeTracker
     where TAuditDbContext : DbContext
@@ -59,19 +60,22 @@ internal class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
     {
         var entity = (IEntity)entry.Entity;
 
-        var metadata = auditingMetadata.GetPropertyAuditing(entity.GetType());
+        var metadata = structure.GetPropertyAuditingMetadata(entity.GetType());
         if (!metadata.IsAuditEnabled)
             return;
 
         var changes = TrackModifyProperties(
             new Context
             {
-                EntityId = JsonSerializer.Serialize(entity.GetKey()),
-                EntityName = auditingMetadata.TrackBy switch
+                EntityId = JsonSerializer.Serialize(entity), // TODO
+                EntityName = structure.TrackBy switch
                 {
-                    TrackBy.Database => entry.Metadata.GetTableName()!,
+                    TrackBy.Database => entry.Metadata.GetTableName()
+                        ?? throw new DomainNotImplementedException("Table name not found"),
                     TrackBy.Domain => entity.GetType().Name,
-                    _ => throw new NotSupportedException("Not support this TrackBy value"),
+                    _ => throw new NotSupportedException(
+                        $"Not support this TrackBy value {structure.TrackBy}"
+                    ),
                 },
                 ModifiedAt = modifiedAt,
                 Metadata = metadata,
@@ -81,7 +85,7 @@ internal class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
 
         auditDbContext.Set<TAudit>().AddRange(changes);
 
-        if (auditingMetadata.HasDifferentDbContextForAuditChanges)
+        if (structure.HasDifferentDbContextForAuditChanges)
         {
             await auditDbContext.SaveChangesAsync(ct);
         }
@@ -105,11 +109,13 @@ internal class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
             {
                 EntityId = context.EntityId,
                 EntityName = context.EntityName,
-                PropertyName = auditingMetadata.TrackBy switch
+                PropertyName = structure.TrackBy switch
                 {
                     TrackBy.Database => propertyMetadata.GetColumnName(),
                     TrackBy.Domain => ownedFrom + propertyMetadata.Name,
-                    _ => throw new NotSupportedException("Not support this TrackBy value"),
+                    _ => throw new NotSupportedException(
+                        $"Not support this TrackBy value {structure.TrackBy}"
+                    ),
                 },
                 TypeName = propertyMetadata.ClrType.ShortDisplayName(),
                 OldValue = JsonSerializer.Serialize(originalValue),

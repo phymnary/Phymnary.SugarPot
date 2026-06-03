@@ -4,11 +4,4 @@
     <RootNamespace>Phymnary.SugarPot.AspNetCore</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FluentValidation" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
-    <PackageReference Include="System.Linq.Async" />
-  </ItemGroup>
-
 </Project>

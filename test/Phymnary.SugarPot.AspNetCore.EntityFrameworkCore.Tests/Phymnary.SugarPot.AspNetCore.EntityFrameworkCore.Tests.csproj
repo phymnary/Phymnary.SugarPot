@@ -17,6 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Phymnary.SugarPot.AspNetCore.EntityFrameworkCore\Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
 

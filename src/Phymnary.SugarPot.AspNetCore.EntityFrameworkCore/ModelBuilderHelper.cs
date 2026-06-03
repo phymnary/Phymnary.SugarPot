@@ -6,12 +6,11 @@ using Phymnary.SugarPot.AspNetCore.Extensions;
 
 namespace Phymnary.SugarPot.AspNetCore;
 
-public class ModelBuilderHelper(
-    ModelBuilder builder,
-    Expression<Func<Guid>>? tenantIdProperty = null
-)
+public class ModelBuilderHelper(ModelBuilder builder, EntitySchemaLookup lookup)
 {
     private ModelBuilder _builder = builder;
+
+    public Expression<Func<Guid>>? TenantIdAccessor { private get; init; }
 
     public ModelBuilderHelper BuildEntity<TEntity>(
         Action<EntityTypeBuilder<TEntity>>? additionalConfigure = null,
@@ -19,7 +18,7 @@ public class ModelBuilderHelper(
     )
         where TEntity : class, IEntity
     {
-        _builder = _builder.BuildEntity(additionalConfigure, schema, tenantIdProperty);
+        _builder = _builder.BuildEntity(additionalConfigure, schema, TenantIdAccessor);
 
         return this;
     }

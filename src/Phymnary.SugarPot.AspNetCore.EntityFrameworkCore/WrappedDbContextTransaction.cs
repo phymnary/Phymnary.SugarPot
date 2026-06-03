@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore.Storage;
+using Phymnary.SugarPot.AspNetCore.Repositories;
 
 namespace Phymnary.SugarPot.AspNetCore;
 
 internal sealed class WrappedDbContextTransaction(
     IDbContextTransaction transaction,
     IAbortedToken abortedProvider
-) : IDbContextTransaction
+) : IQueryTransaction
 {
     public Guid TransactionId { get; } = transaction.TransactionId;
 

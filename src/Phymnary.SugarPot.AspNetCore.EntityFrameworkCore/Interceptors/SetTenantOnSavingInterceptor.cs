@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Phymnary.SugarPot.AspNetCore.Domain.Exceptions;
+using Phymnary.SugarPot.AspNetCore.Exceptions;
 using Phymnary.SugarPot.AspNetCore.MultiTenancy;
 
 namespace Phymnary.SugarPot.AspNetCore.Interceptors;
