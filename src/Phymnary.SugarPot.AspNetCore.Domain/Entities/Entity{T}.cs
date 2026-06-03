@@ -9,19 +9,7 @@ public interface IEntity
     EntityDomainStatus DomainStatus { get; }
 }
 
-public interface IHasKey<TKey>
-    where TKey : notnull
-{
-    TKey GetKey();
-}
-
-public interface IEntity<TKey> : IEntity, IHasKey<TKey>
-    where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
-{
-    TKey Id { get; }
-}
-
-public abstract class Entity<TKey> : IEntity<TKey>
+public abstract class Entity<TKey> : IEntity
     where TKey : IComparable, IComparable<TKey>, IEquatable<TKey>
 {
     protected Entity() { }
@@ -35,6 +23,4 @@ public abstract class Entity<TKey> : IEntity<TKey>
     public TKey Id { get; protected init; } = default!;
 
     public EntityDomainStatus DomainStatus { get; } = new();
-
-    public TKey GetKey() => Id;
 }

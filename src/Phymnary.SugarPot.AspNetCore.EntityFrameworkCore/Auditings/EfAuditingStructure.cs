@@ -44,7 +44,7 @@ public class EfAuditingStructure
                         yield return disabled;
                     }
                 }
-                else if (propertyInfo.HasAttribute<DisableAuditingAttribute>())
+                else if (propertyInfo.HasAttribute<DisabledAuditingAttribute>())
                 {
                     if (type.IsAssignableTo(typeof(IEntity)))
                     {
@@ -56,7 +56,7 @@ public class EfAuditingStructure
                 continue;
             }
 
-            if (propertyInfo.HasAttribute<DisableAuditingAttribute>())
+            if (propertyInfo.HasAttribute<DisabledAuditingAttribute>())
                 yield return owned + propertyInfo.Name;
         }
     }
@@ -70,9 +70,9 @@ public class EfAuditingStructure
 
         value = new EntityPropertyAuditingMetadata
         {
-            IsAuditEnabled = !entityType.HasAttribute<DisableAuditingAttribute>(),
+            IsAuditEnabled = !entityType.HasAttribute<DisabledAuditingAttribute>(),
             ValidAuditProperties =
-                entityType.GetCustomAttribute<AuditedAttribute>()?.Properties.ToFrozenSet()
+                entityType.GetCustomAttribute<AuditingAttribute>()?.Properties.ToFrozenSet()
                 ?? EmptyFrozenSet,
             IgnoreAuditProperties = FrozenSet.ToFrozenSet([
                 "CreatedAt",

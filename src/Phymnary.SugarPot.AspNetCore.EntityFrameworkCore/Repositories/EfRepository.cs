@@ -6,13 +6,12 @@ using Phymnary.SugarPot.AspNetCore.Repositories.AdvanceQueries;
 
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
-public abstract class EfRepository<TDbContext, TEntity, TKey>(
+public abstract class EfRepository<TDbContext, TEntity>(
     TDbContext dbContext,
     IRepositoryOptions<TEntity> options,
     EfRepositoryAddons addons
-) : IRepository<TEntity, TKey>
-    where TEntity : class, IEntity, IHasKey<TKey>
-    where TKey : notnull
+) : IRepository<TEntity>
+    where TEntity : class, IEntity
     where TDbContext : DbContext
 {
     public DbSet<TEntity> DbSet { get; } = dbContext.Set<TEntity>();
@@ -38,7 +37,7 @@ public abstract class EfRepository<TDbContext, TEntity, TKey>(
         var result = await options.Validator.ValidateAsync(entity, ct);
         if (!result.IsValid)
             throw new EntityValidationException(
-                $"Entity {typeof(TEntity).Name} with Id {entity.GetKey()} failed validation"
+                $"Entity {typeof(TEntity).Name} failed validation at domain level"
             )
             {
                 Failures =
@@ -111,20 +110,6 @@ public abstract class EfRepository<TDbContext, TEntity, TKey>(
         await ValidateAsync(entity, ct);
 
         return await dbContext.SaveChangesAsync(ct);
-    }
-
-    public async Task<TEntity> GetAsync(
-        TKey id,
-        bool canIncludeDetails = false,
-        CancellationToken cancellationToken = default
-    )
-    {
-        var ct = GetRequestAborted(cancellationToken);
-        return await Queryable(canIncludeDetails)
-                .FirstOrDefaultAsync(e => e.GetKey().Equals(id), ct)
-            ?? throw new EntityNotFoundException(
-                $"Entity {typeof(TEntity).Name} with Id {id} was not found"
-            );
     }
 
     public async Task<TEntity?> FindAsync(

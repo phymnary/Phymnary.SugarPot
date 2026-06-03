@@ -5,9 +5,8 @@ using Phymnary.SugarPot.AspNetCore.Repositories.AdvanceQueries;
 
 namespace Phymnary.SugarPot.AspNetCore.Repositories;
 
-public interface IRepository<TEntity, TKey>
-    where TEntity : class, IEntity, IHasKey<TKey>
-    where TKey : notnull
+public interface IRepository<TEntity>
+    where TEntity : class, IEntity
 {
     CancellationToken GetRequestAborted(CancellationToken cancellationToken);
 
@@ -49,12 +48,6 @@ public interface IRepository<TEntity, TKey>
     /// <exception cref="Microsoft.EntityFrameworkCore.DbUpdateException">Database exceptions.</exception>
     /// <exception cref="EntityValidationException">Throw by validator.</exception>
     Task<int> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
-
-    Task<TEntity> GetAsync(
-        TKey key,
-        bool canIncludeDetails = false,
-        CancellationToken cancellationToken = default
-    );
 
     Task<TEntity?> FindAsync(
         Expression<Func<TEntity, bool>> predicate,

@@ -58,21 +58,21 @@ internal class EntityPropertyChangeTracker<TAuditDbContext, TAudit>(
         CancellationToken ct
     )
     {
-        var entity = (IEntity)entry.Entity;
+        var auditable = (IAuditable)entry.Entity;
 
-        var metadata = structure.GetPropertyAuditingMetadata(entity.GetType());
+        var metadata = structure.GetPropertyAuditingMetadata(auditable.GetType());
         if (!metadata.IsAuditEnabled)
             return;
 
         var changes = TrackModifyProperties(
             new Context
             {
-                EntityId = JsonSerializer.Serialize(entity), // TODO
+                EntityId = auditable.GetAuditKey(),
                 EntityName = structure.TrackBy switch
                 {
                     TrackBy.Database => entry.Metadata.GetTableName()
                         ?? throw new DomainNotImplementedException("Table name not found"),
-                    TrackBy.Domain => entity.GetType().Name,
+                    TrackBy.Domain => auditable.GetType().Name,
                     _ => throw new NotSupportedException(
                         $"Not support this TrackBy value {structure.TrackBy}"
                     ),
