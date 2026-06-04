@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Phymnary.SugarPot.AspNetCore.Api.Roslyn" VersionOverride="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Phymnary.SugarPot.AspNetCore.Api\Phymnary.SugarPot.AspNetCore.Api.csproj" />
   </ItemGroup>
 
