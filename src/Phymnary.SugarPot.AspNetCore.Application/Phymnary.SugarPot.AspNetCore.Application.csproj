@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Phymnary.SugarPot.Module\Phymnary.SugarPot.Module.csproj" />
+    <ProjectReference Include="..\Phymnary.SugarPot.AspNetCore.Domain\Phymnary.SugarPot.AspNetCore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
 </Project>

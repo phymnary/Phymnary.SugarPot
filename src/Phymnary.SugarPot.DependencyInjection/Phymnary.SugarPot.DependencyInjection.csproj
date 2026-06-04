@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>0.0.1</Version>
+    <Version>1.0.0</Version>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Product>Microsoft Dependency Injection Auto Register</Product>
     <Title>Phymnary.SugarPot.DependencyInjection</Title>
@@ -13,8 +13,11 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(Configuration)' == 'Release'">
-    <None Include="..\roslyn\$(AssemblyName).Roslyn\bin\$(Configuration)\netstandard2.0\$(AssemblyName).Roslyn.dll" Pack="true" Visible="false" PackagePath="analyzers/dotnet/cs" />
+  <ItemGroup>
+    <ProjectReference Include="..\roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn.csproj">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </ProjectReference>
   </ItemGroup>
-
+  
 </Project>

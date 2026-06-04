@@ -4,7 +4,7 @@ namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
 public class InternalServiceUnavailableException(string message)
     : Exception(message),
-        ISolutionException
+        IApplicationException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.ServiceUnavailable;
 

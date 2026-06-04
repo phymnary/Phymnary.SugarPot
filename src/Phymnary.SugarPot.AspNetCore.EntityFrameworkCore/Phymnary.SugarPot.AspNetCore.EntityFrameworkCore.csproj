@@ -10,10 +10,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
   </ItemGroup>
 
-
   <ItemGroup>
     <ProjectReference Include="..\Phymnary.SugarPot.AspNetCore.Domain\Phymnary.SugarPot.AspNetCore.Domain.csproj" />
-    <ProjectReference Include="..\Phymnary.SugarPot.Module\Phymnary.SugarPot.Module.csproj" />
   </ItemGroup>
 
 </Project>

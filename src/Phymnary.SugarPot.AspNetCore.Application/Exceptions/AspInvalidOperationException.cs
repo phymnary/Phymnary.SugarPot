@@ -2,15 +2,15 @@ using System.Net;
 
 namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
-public class ApiInvalidOperationException(string message)
+public class AspInvalidOperationException(string message)
     : InvalidOperationException(message),
-        ISolutionException
+        IApplicationException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.UnprocessableEntity;
 
     public string? ErrorCode { get; private set; }
 
-    public ApiInvalidOperationException WithErrorCode(string code)
+    public AspInvalidOperationException WithErrorCode(string code)
     {
         ErrorCode = code;
         return this;

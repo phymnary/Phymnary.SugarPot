@@ -5,7 +5,8 @@
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable;</WarningsAsErrors>
 
-    <AspPackageVersion>0.0.1</AspPackageVersion>
+    <AspPackageVersion>1.0.0</AspPackageVersion>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Bsweest</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
