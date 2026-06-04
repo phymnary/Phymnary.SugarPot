@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Phymnary.SugarPot.AspNetCore.Auditings;
-using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Exceptions;
 using Phymnary.SugarPot.AspNetCore.Extensions;
 using Phymnary.SugarPot.AspNetCore.Security;

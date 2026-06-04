@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="xunit.v3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Phymnary.SugarPot.AspNetCore.Api\Phymnary.SugarPot.AspNetCore.Api.csproj" />
+    <ProjectReference Include="..\..\src\Phymnary.SugarPot.DependencyInjection\Phymnary.SugarPot.DependencyInjection.csproj" />
+    <ProjectReference Include="..\..\src\roslyn\Phymnary.SugarPot.AspNetCore.Api.Roslyn\Phymnary.SugarPot.AspNetCore.Api.Roslyn.csproj" />
+    <ProjectReference Include="..\..\src\roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn.csproj" />
+  </ItemGroup>
+
+</Project>

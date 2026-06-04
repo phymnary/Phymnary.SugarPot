@@ -9,10 +9,6 @@
     <PackageTags>boilerplate;dependency-injection;auto-register</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-
   <ItemGroup>
     <Content Include="README.md">
       <Pack>True</Pack>

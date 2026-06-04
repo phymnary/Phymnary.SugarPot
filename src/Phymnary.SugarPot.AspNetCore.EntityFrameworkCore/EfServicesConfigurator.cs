@@ -19,6 +19,11 @@ public class EfServicesConfigurator<TDbContext>
 
     private bool _canAudit;
 
+    internal EfServicesConfigurator(IServiceCollection services)
+    {
+        _services = services;
+    }
+
     private void RegisterAuditing()
     {
         if (_canAudit)
@@ -26,11 +31,6 @@ public class EfServicesConfigurator<TDbContext>
 
         _canAudit = true;
         _services.AddScoped<IInterceptor, AuditOnSavingInterceptor>();
-    }
-
-    internal EfServicesConfigurator(IServiceCollection services)
-    {
-        _services = services;
     }
 
     public EfServicesConfigurator<TDbContext> ConfigureAuditing(
@@ -75,7 +75,7 @@ public class EfServicesConfigurator<TDbContext>
         return this;
     }
 
-    internal IServiceCollection Build()
+    public IServiceCollection Build()
     {
         if (!_canAuditPropertyChange)
             _services.AddSingleton<IEntityPropertyChangeTracker>(

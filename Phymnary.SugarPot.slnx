@@ -2,18 +2,20 @@
 	<Folder Name="/Solution Items/">
 		<File Path=".editorconfig" />
 		<File Path=".gitignore" />
-		<File Path="Directory.Build.props" />
 		<File Path="Directory.Packages.props" />
 	</Folder>
 	<Folder Name="/src/">
+		<File Path="src/Directory.Build.props" />
+		<Project Path="src/Phymnary.SugarPot.AspNetCore.Api/Phymnary.SugarPot.AspNetCore.Api.csproj" />
 		<Project Path="src/Phymnary.SugarPot.AspNetCore.Domain/Phymnary.SugarPot.AspNetCore.Domain.csproj" Id="2a7186b0-a6f2-4293-abba-2d24b88521d4" />
 		<Project Path="src/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.csproj" Id="26fdfaed-8bce-42fc-984d-53429616e953" />
-		<Project Path="src/Phymnary.SugarPot.AspNetCore/Phymnary.SugarPot.AspNetCore.csproj" />
+		<Project Path="src/Phymnary.SugarPot.AspNetCore.Host/Phymnary.SugarPot.AspNetCore.Host.csproj" Id="35d86f18-fd84-455e-bac8-bd0611adeab3" />
+		<Project Path="src/Phymnary.SugarPot.Module/Phymnary.SugarPot.Module.csproj" Id="d25c6af4-8024-48ea-863c-86954231b728" />
 		<Project Path="src/Phymnary.SugarPot.DependencyInjection/Phymnary.SugarPot.DependencyInjection.csproj" />
 	</Folder>
 	<Folder Name="/src/roslyn/">
 		<File Path="src/roslyn/Directory.Build.props" />
-		<Project Path="src/roslyn/AspNetCore.Boilerplate.Roslyn/AspNetCore.Boilerplate.Roslyn.csproj" />
+		<Project Path="src/roslyn/Phymnary.SugarPot.AspNetCore.Api.Roslyn/Phymnary.SugarPot.AspNetCore.Api.Roslyn.csproj" />
 		<Project Path="src/roslyn/Phymnary.SugarPot.DependencyInjection.Roslyn/Phymnary.SugarPot.DependencyInjection.Roslyn.csproj" />
 	</Folder>
 	<Folder Name="/src/shared/">
@@ -22,6 +24,6 @@
 	</Folder>
 	<Folder Name="/test/">
 		<Project Path="test/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Tests/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Tests.csproj" Id="f8575ec1-ee1b-464c-87c3-dad41619ba52" />
-		<Project Path="test/Phymnary.SugarPot.DependencyInjection.Roslyn.Tests/Phymnary.SugarPot.DependencyInjection.Roslyn.Tests.csproj" />
+		<Project Path="test/Phymnary.SugarPot.Roslyn.Tests/Phymnary.SugarPot.Roslyn.Tests.csproj" />
 	</Folder>
 </Solution>

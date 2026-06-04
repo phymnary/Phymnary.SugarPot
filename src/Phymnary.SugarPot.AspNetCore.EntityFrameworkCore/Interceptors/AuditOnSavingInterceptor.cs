@@ -11,7 +11,7 @@ namespace Phymnary.SugarPot.AspNetCore.Interceptors;
 public class AuditOnSavingInterceptor(
     ICurrentUser currentUser,
     IEntityPropertyChangeTracker propertyChangeTracker,
-    IRequestedAt requestedAt
+    IRunAt requestedAt
 ) : SaveChangesInterceptor
 {
     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(

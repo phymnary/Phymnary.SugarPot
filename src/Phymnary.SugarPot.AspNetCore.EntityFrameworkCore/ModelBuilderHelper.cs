@@ -6,7 +6,7 @@ using Phymnary.SugarPot.AspNetCore.Extensions;
 
 namespace Phymnary.SugarPot.AspNetCore;
 
-public class ModelBuilderHelper(ModelBuilder builder, EntitySchemaLookup lookup)
+public class ModelBuilderHelper(ModelBuilder builder)
 {
     private ModelBuilder _builder = builder;
 

@@ -3,7 +3,7 @@ using Phymnary.SugarPot.AspNetCore.Repositories;
 
 namespace Phymnary.SugarPot.AspNetCore;
 
-public class DbFunctionProvider<TDbContext>(TDbContext dbContext, IAbortedToken ctProvider)
+internal class DbFunctionProvider<TDbContext>(TDbContext dbContext, IAbortedToken ctProvider)
     : IDbFunctionProvider
     where TDbContext : DbContext
 {

@@ -3,6 +3,7 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Extensions;
+using Phymnary.SugarPot.Module.Extensions;
 
 namespace Phymnary.SugarPot.AspNetCore.Auditings;
 

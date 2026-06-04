@@ -4,7 +4,7 @@ using Phymnary.SugarPot.AspNetCore.Security;
 
 namespace Phymnary.SugarPot.AspNetCore.Interceptors;
 
-public class SoftDeleteInterceptor(ICurrentUser currentUser, IRequestedAt requestedAt)
+public class SoftDeleteInterceptor(ICurrentUser currentUser, IRunAt requestedAt)
     : SaveChangesInterceptor
 {
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
