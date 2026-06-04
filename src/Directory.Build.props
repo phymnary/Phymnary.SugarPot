@@ -17,6 +17,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="README.md">
+      <Pack>True</Pack>
+      <PackagePath>/</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
     <InternalsVisibleTo Include="DynamicProxyGenAssembly2" />
   </ItemGroup>

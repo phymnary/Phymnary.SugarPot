@@ -7,6 +7,7 @@ using Phymnary.SugarPot.AspNetCore.Auditings;
 using Phymnary.SugarPot.AspNetCore.Exceptions;
 using Phymnary.SugarPot.AspNetCore.Extensions;
 using Phymnary.SugarPot.AspNetCore.Security;
+using Phymnary.SugarPot.Module.Extensions;
 
 namespace Phymnary.SugarPot.AspNetCore.Interceptors.Trackers;
 

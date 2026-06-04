@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Phymnary.SugarPot.Roslyn.Tests;
 
-public class ApiSchemaGeneratorTest
+public class EndpointGeneratorTest
 {
     private const string ClassText = """
         using System;
@@ -65,7 +65,7 @@ public class ApiSchemaGeneratorTest
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(
-            nameof(ApiSchemaGeneratorTest),
+            nameof(EndpointGeneratorTest),
             [CSharpSyntaxTree.ParseText(ClassText, cancellationToken: ct)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
@@ -122,7 +122,7 @@ public class ApiSchemaGeneratorTest
             {
                 public global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder ConfigureRouteBuilder(global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder app)
                 {
-                    var builder = global::Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet(app, global::TestNamespace.SourceGenerator.GET.ApiGroup.GetRouteName(this), HandleAsync);
+                    var builder = global::Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.MapGet(app, RoutePattern, HandleAsync);
                     builder = global::TestNamespace.SourceGenerator.GET.ApiGroup.BuildRoute(builder);
                     return builder;
                 }
@@ -136,11 +136,14 @@ public class ApiSchemaGeneratorTest
         #nullable enable
         namespace TestNamespace.SourceGenerator.GET
         {
-            partial class ApiSchema
+            partial class AppApiSchema
             {
                 public void MapEndpoints(global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder app)
                 {
-                    global::Phymnary.SugarPot.AspNetCore.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.Connect.GET.PostUser>(app);
+                    global::AspNetCore.Boilerplate.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.GET.PostUser>(app);
+                    using global::Microsoft.Extensions.DependencyInjection.IServiceScope scope = global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.CreateScope(app.ServiceProvider);
+                    global::System.IServiceProvider serviceProvider = scope.ServiceProvider;
+                    global::AspNetCore.Boilerplate.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.GET.GetUser>(app, serviceProvider);
                 }
             }
         }

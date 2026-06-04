@@ -1,13 +1,13 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.MultiTenancy;
-using System.Linq.Expressions;
 using static System.Linq.Expressions.Expression;
 
 namespace Phymnary.SugarPot.AspNetCore.Extensions;
 
-public static class ModelBuilderExtensions
+internal static class ModelBuilderExtensions
 {
     public static ModelBuilder BuildEntity<TEntity>(
         this ModelBuilder modelBuilder,

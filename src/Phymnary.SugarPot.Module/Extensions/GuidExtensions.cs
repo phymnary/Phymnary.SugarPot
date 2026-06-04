@@ -1,4 +1,4 @@
-namespace Phymnary.SugarPot.AspNetCore.Extensions;
+namespace Phymnary.SugarPot.Module.Extensions;
 
 public static class GuidExtensions
 {
