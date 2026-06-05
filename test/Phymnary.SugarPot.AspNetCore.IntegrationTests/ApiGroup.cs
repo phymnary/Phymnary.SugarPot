@@ -13,8 +13,9 @@ public static class ApiGroup
     }
 
     [RouteBuilder]
-    public static void BuildRoute(RouteHandlerBuilder builder)
+    public static RouteHandlerBuilder BuildRoute(RouteHandlerBuilder builder)
     {
         builder.RequireAuthorization();
+        return builder;
     }
 }

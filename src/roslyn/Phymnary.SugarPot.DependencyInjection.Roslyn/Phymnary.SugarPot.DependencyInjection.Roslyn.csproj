@@ -1,7 +1,2 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <Version>$(DIPackedVersion)</Version>
-  </PropertyGroup>
-
 </Project>

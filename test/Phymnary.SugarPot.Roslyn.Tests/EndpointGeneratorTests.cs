@@ -29,9 +29,10 @@ public class EndpointGeneratorTest
                 }
 
                 [global::Phymnary.SugarPot.AspNetCore.Api.RouteBuilder]
-                public static void BuildRoute(Microsoft.AspNetCore.Builder.RouteHandlerBuilder builder)
+                public static Microsoft.AspNetCore.Builder.RouteHandlerBuilder BuildRoute(Microsoft.AspNetCore.Builder.RouteHandlerBuilder builder)
                 {
                     builder.RequireAuthorization();
+                    return builder;
                 }
             }
             
