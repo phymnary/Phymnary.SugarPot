@@ -8,7 +8,7 @@ namespace Phymnary.SugarPot.AspNetCore.Api;
 ///     // Static method to get route pattern for every endpoint in group
 ///     [RoutePattern]
 ///     public static string GetRouteName&lt;TEndpoint&gt;(TEndpoint endpoint)
-///         where TEndpoint : class, global::AspNetCore.Boilerplate.Api.IEndpoint
+///         where TEndpoint : class, global::Phymnary.SugarPot.AspNetCore.Api.IEndpoint
 ///     {
 ///         return typeof(TEndpoint).Name;
 ///     }

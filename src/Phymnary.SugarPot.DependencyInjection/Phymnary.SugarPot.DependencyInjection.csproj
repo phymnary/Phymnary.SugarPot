@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Version>1.0.0</Version>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Version>$(DIPackedVersion)</Version>
     <Product>Microsoft Dependency Injection Auto Register</Product>
     <Title>Phymnary.SugarPot.DependencyInjection</Title>
     <Description>Code generator for auto registering services with Microsoft Dependency Injection</Description>
@@ -14,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn.csproj">
+    <ProjectReference Include="..\roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </ProjectReference>

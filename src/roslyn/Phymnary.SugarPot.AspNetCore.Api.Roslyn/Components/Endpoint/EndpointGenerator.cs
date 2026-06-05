@@ -67,7 +67,7 @@ public partial class EndpointGenerator : IIncrementalGenerator
             )
             .Where(it => it is not null)!;
 
-        IncrementalValuesProvider<ControllerInfo> controllerHierarchies =
+        IncrementalValuesProvider<ApiSchemaInfo> controllerHierarchies =
             context.SyntaxProvider.ForAttributeWithMetadataName(
                 $"{GeneratorConstant.LibNamespace}.ApiSchemaAttribute",
                 static (node, _) => node is ClassDeclarationSyntax,
@@ -75,10 +75,7 @@ public partial class EndpointGenerator : IIncrementalGenerator
                 {
                     var classSymbol = (INamedTypeSymbol)ctx.TargetSymbol;
 
-                    return new ControllerInfo(
-                        HierarchyInfo.From(classSymbol),
-                        classSymbol.IsStatic
-                    );
+                    return new ApiSchemaInfo(HierarchyInfo.From(classSymbol), classSymbol.IsStatic);
                 }
             );
 
@@ -124,7 +121,7 @@ public partial class EndpointGenerator : IIncrementalGenerator
         );
 
         IncrementalValuesProvider<(
-            ControllerInfo Controller,
+            ApiSchemaInfo Controller,
             ImmutableArray<EndpointInfo> Endpoints
         )> controllerWithEndpoints = controllerHierarchies.Combine(endpointHierarchies.Collect());
 
@@ -142,7 +139,7 @@ public partial class EndpointGenerator : IIncrementalGenerator
                     .Select(Execute.GetMapConstructedEndpointExpression)
                     .ToImmutableArray();
 
-                var compilationUnit = BuildSyntax.GetCompilationUnitForController(
+                var compilationUnit = BuildSyntax.GetCompilationUnitForSchema(
                     item.Controller.Hierarchy,
                     item.Controller.IsStatic,
                     nonConstructExpression,

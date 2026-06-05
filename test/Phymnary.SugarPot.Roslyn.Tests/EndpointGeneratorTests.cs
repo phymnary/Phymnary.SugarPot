@@ -100,6 +100,7 @@ public class EndpointGeneratorTest
         #nullable enable
         namespace TestNamespace.SourceGenerator.GET
         {
+            /// <inheritdoc/>
             partial class PostUser : global::Phymnary.SugarPot.AspNetCore.Api.IEndpoint
             {
                 public global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder ConfigureRouteBuilder(global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder app)
@@ -118,6 +119,7 @@ public class EndpointGeneratorTest
         #nullable enable
         namespace TestNamespace.SourceGenerator.GET
         {
+            /// <inheritdoc/>
             partial class GetUser : global::Phymnary.SugarPot.AspNetCore.Api.IEndpoint
             {
                 public global::Microsoft.AspNetCore.Builder.RouteHandlerBuilder ConfigureRouteBuilder(global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder app)
@@ -136,14 +138,15 @@ public class EndpointGeneratorTest
         #nullable enable
         namespace TestNamespace.SourceGenerator.GET
         {
+            /// <inheritdoc/>
             partial class AppApiSchema
             {
                 public void MapEndpoints(global::Microsoft.AspNetCore.Routing.IEndpointRouteBuilder app)
                 {
-                    global::AspNetCore.Boilerplate.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.GET.PostUser>(app);
+                    global::Phymnary.SugarPot.AspNetCore.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.GET.PostUser>(app);
                     using global::Microsoft.Extensions.DependencyInjection.IServiceScope scope = global::Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.CreateScope(app.ServiceProvider);
                     global::System.IServiceProvider serviceProvider = scope.ServiceProvider;
-                    global::AspNetCore.Boilerplate.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.GET.GetUser>(app, serviceProvider);
+                    global::Phymnary.SugarPot.AspNetCore.Api.Extensions.EndpointRouteBuilderExtensions.MapEndpoint<global::TestNamespace.SourceGenerator.GET.GetUser>(app, serviceProvider);
                 }
             }
         }

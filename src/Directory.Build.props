@@ -1,11 +1,12 @@
 <Project>
+  <Import Project="..\Directory.Build.props"/>
+  
   <PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<WarningsAsErrors>nullable;</WarningsAsErrors>
 
-    <AspPackageVersion>1.0.0</AspPackageVersion>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Authors>Bsweest</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

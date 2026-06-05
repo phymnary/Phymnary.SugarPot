@@ -1,0 +1,6 @@
+<Project>
+  <PropertyGroup>
+    <AspPackedVersion>1.0.0</AspPackedVersion>
+    <DIPackedVersion>1.0.0</DIPackedVersion>
+  </PropertyGroup>
+</Project>

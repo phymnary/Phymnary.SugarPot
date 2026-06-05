@@ -2,7 +2,7 @@
   
   <PropertyGroup>
     <RootNamespace>Phymnary.SugarPot.AspNetCore</RootNamespace>
-    <Version>$(AspPackageVersion)</Version>
+    <Version>$(AspPackedVersion)</Version>
   </PropertyGroup>
 
   <ItemGroup>

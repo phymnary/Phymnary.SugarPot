@@ -41,6 +41,7 @@ public sealed class ServiceGeneratorTest
         #nullable enable
         namespace TestNamespace
         {
+            /// <inheritdoc/>
             partial class AutoRegisterClass : Phymnary.SugarPot.DependencyInjection.IAutoRegister
             {
                 public void AddDependencies(global::Microsoft.Extensions.DependencyInjection.IServiceCollection services)

@@ -39,7 +39,7 @@ public class EndpointAnalyzer : DiagnosticAnalyzer
                 .Any(member => member is IMethodSymbol && member.Name == "HandleAsync")
         )
             context.ReportDiagnostic(
-                DiagnosticInfo
+                SourceDiagnosticInfo
                     .Create(
                         DiagnosticDescriptors.MissingHandleMethodForEndpoint,
                         typeSymbol,

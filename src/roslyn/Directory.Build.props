@@ -1,4 +1,6 @@
 <Project>
+  <Import Project="..\..\Directory.Build.props"/>
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>12</LangVersion>
@@ -18,11 +20,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\shared\Phymnary.SugarPot.RoslynComponents\Phymnary.SugarPot.RoslynComponents.csproj">
+    <PackageReference Include="PolySharp">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </ProjectReference>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+    <PackageReference Include="Phymnary.SugarPot.RoslynComponents" GeneratePathProperty="true" PrivateAssets="all" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <GetTargetPathDependsOn>$(GetTargetPathDependsOn);GetDependencyTargetPaths</GetTargetPathDependsOn>
+  </PropertyGroup>
+
+  <Target Name="GetDependencyTargetPaths">
+    <ItemGroup>
+      <TargetPathWithTargetPlatformMoniker Include="$(PKGPhymnary_SugarPot_RoslynComponents)\lib\netstandard2.0\Phymnary.SugarPot.RoslynComponents.dll" IncludeRuntimeDependency="false" />
+    </ItemGroup>
+  </Target>
 
   <ItemGroup>
     <!-- Package the generator in the analyzer directory of the nuget package -->
@@ -35,4 +53,5 @@
       <PackagePath>/</PackagePath>
     </Content>
   </ItemGroup>
+
 </Project>

@@ -5,7 +5,7 @@ namespace Phymnary.SugarPot.AspNetCore.IntegrationTests;
 [Endpoint]
 internal partial class PostUser
 {
-    private int HandleAsync()
+    private static int HandleAsync()
     {
         return 0;
     }
