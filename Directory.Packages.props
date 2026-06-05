@@ -1,17 +1,18 @@
 <Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-    <MsVersion>[8.0.0, 9.0.0)</MsVersion>
-    <MsExtVersion>[10.0.0, 11.0.0)</MsExtVersion>
+    <MsVersion>[8.0.0,)</MsVersion>
+    <MsExtVersion>[8.0.0,)</MsExtVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Configuration" Version="$(MsExtVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(MsExtVersion)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MsExtVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MsExtVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(MsVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MsVersion)" />
-    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MsExtVersion)" />
-    <PackageVersion Include="System.Linq.Async" Version="6.0.3" />
+    <PackageVersion Include="Phymnary.SugarPot.RoslynComponents" Version="1.0.0" />
+    <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.1" />
     <PackageVersion Include="coverlet.collector" Version="10.0.1" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />

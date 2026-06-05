@@ -29,7 +29,7 @@ public partial class AutoRegisterGenerator
             var typeName = typeSymbol.GetFullyQualifiedName();
             var attribute = matchedAttributes.First();
 
-            if (attribute.GetNamedArgument("IsSelf") is true)
+            if (attribute.GetNamedArgument("IsSelf", false) is true)
                 serviceTypeName = typeName;
             else if (typeSymbol.Interfaces.Length > 0)
                 serviceTypeName = typeSymbol.Interfaces[0].GetFullyQualifiedName();

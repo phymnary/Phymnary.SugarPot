@@ -36,7 +36,7 @@ public class AutoRegisterAnalyzer : DiagnosticAnalyzer
 
         var typeName = typeSymbol.GetFullyQualifiedMetadataName();
 
-        using var builder = ImmutableArrayBuilder<DiagnosticInfo>.Rent();
+        using var builder = ImmutableArrayBuilder<SourceDiagnosticInfo>.Rent();
 
         if (typeSymbol is not { IsAbstract: false, IsGenericType: false })
             builder.Add(

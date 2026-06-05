@@ -5,7 +5,7 @@ using Phymnary.SugarPot.RoslynComponents.Helpers;
 
 namespace Phymnary.SugarPot.RoslynComponents.Models;
 
-public sealed record DiagnosticInfo(
+public sealed record SourceDiagnosticInfo(
     DiagnosticDescriptor Descriptor,
     SyntaxTree? SyntaxTree,
     TextSpan TextSpan,
@@ -13,9 +13,9 @@ public sealed record DiagnosticInfo(
 )
 {
     /// <summary>
-    ///     Creates a new <see cref="Diagnostic" /> instance with the state from this model.
+    ///     Creates a new <see cref="Microsoft.CodeAnalysis.Diagnostic" /> instance with the state from this model.
     /// </summary>
-    /// <returns>A new <see cref="Diagnostic" /> instance with the state from this model.</returns>
+    /// <returns>A new <see cref="Microsoft.CodeAnalysis.Diagnostic" /> instance with the state from this model.</returns>
     public Diagnostic ToDiagnostic()
     {
         return Diagnostic.Create(
@@ -26,13 +26,13 @@ public sealed record DiagnosticInfo(
     }
 
     /// <summary>
-    ///     Creates a new <see cref="DiagnosticInfo" /> instance with the specified parameters.
+    ///     Creates a new <see cref="SourceDiagnosticInfo" /> instance with the specified parameters.
     /// </summary>
     /// <param name="descriptor">The input <see cref="DiagnosticDescriptor" /> for the diagnostics to create.</param>
     /// <param name="symbol">The source <see cref="ISymbol" /> to attach the diagnostics to.</param>
     /// <param name="args">The optional arguments for the formatted message to include.</param>
-    /// <returns>A new <see cref="DiagnosticInfo" /> instance with the specified parameters.</returns>
-    public static DiagnosticInfo Create(
+    /// <returns>A new <see cref="SourceDiagnosticInfo" /> instance with the specified parameters.</returns>
+    public static SourceDiagnosticInfo Create(
         DiagnosticDescriptor descriptor,
         ISymbol symbol,
         params object[] args
@@ -40,7 +40,7 @@ public sealed record DiagnosticInfo(
     {
         var location = symbol.Locations.First();
 
-        return new DiagnosticInfo(
+        return new SourceDiagnosticInfo(
             descriptor,
             location.SourceTree,
             location.SourceSpan,
@@ -49,13 +49,13 @@ public sealed record DiagnosticInfo(
     }
 
     /// <summary>
-    ///     Creates a new <see cref="DiagnosticInfo" /> instance with the specified parameters.
+    ///     Creates a new <see cref="SourceDiagnosticInfo" /> instance with the specified parameters.
     /// </summary>
     /// <param name="descriptor">The input <see cref="DiagnosticDescriptor" /> for the diagnostics to create.</param>
     /// <param name="node">The source <see cref="SyntaxNode" /> to attach the diagnostics to.</param>
     /// <param name="args">The optional arguments for the formatted message to include.</param>
-    /// <returns>A new <see cref="DiagnosticInfo" /> instance with the specified parameters.</returns>
-    public static DiagnosticInfo Create(
+    /// <returns>A new <see cref="SourceDiagnosticInfo" /> instance with the specified parameters.</returns>
+    public static SourceDiagnosticInfo Create(
         DiagnosticDescriptor descriptor,
         SyntaxNode node,
         params object[] args
@@ -63,7 +63,7 @@ public sealed record DiagnosticInfo(
     {
         var location = node.GetLocation();
 
-        return new DiagnosticInfo(
+        return new SourceDiagnosticInfo(
             descriptor,
             location.SourceTree,
             location.SourceSpan,
@@ -72,7 +72,10 @@ public sealed record DiagnosticInfo(
     }
 
     public DiagnosticDescriptor Descriptor { get; } = Descriptor;
+
     public SyntaxTree? SyntaxTree { get; } = SyntaxTree;
+
     public TextSpan TextSpan { get; } = TextSpan;
+
     public EquatableArray<string> Arguments { get; } = Arguments;
 }

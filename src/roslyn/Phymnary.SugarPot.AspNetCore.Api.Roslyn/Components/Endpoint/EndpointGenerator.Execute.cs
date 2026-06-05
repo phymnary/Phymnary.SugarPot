@@ -270,7 +270,7 @@ public partial class EndpointGenerator
                         MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
                             IdentifierName(
-                                "global::AspNetCore.Boilerplate.Api.Extensions.EndpointRouteBuilderExtensions"
+                                $"global::{GeneratorConstant.LibNamespace}.Extensions.EndpointRouteBuilderExtensions"
                             ),
                             GenericName("MapEndpoint")
                                 .WithTypeArgumentList(
@@ -297,7 +297,7 @@ public partial class EndpointGenerator
                         MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
                             IdentifierName(
-                                "global::AspNetCore.Boilerplate.Api.Extensions.EndpointRouteBuilderExtensions"
+                                $"global::{GeneratorConstant.LibNamespace}.Extensions.EndpointRouteBuilderExtensions"
                             ),
                             GenericName("MapEndpoint")
                                 .WithTypeArgumentList(

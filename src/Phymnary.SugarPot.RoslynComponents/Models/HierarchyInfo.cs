@@ -4,7 +4,7 @@ using Phymnary.SugarPot.RoslynComponents.Helpers;
 
 namespace Phymnary.SugarPot.RoslynComponents.Models;
 
-public sealed record HierarchyInfo(
+public sealed partial record HierarchyInfo(
     string FilenameHint,
     string MetadataName,
     string Namespace,

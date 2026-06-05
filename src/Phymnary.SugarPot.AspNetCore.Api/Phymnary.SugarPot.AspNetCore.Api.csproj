@@ -2,22 +2,24 @@
 
   <PropertyGroup>
     <RootNamespace>Phymnary.SugarPot.AspNetCore</RootNamespace>
-    <Version>$(AspPackageVersion)</Version>
+    <Version>$(AspPackedVersion)</Version>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
-    <PackageReference Include="System.Linq.Async" />
-    <PackageReference Include="Phymnary.SugarPot.AspNetCore.Api.Roslyn" VersionOverride="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Phymnary.SugarPot.AspNetCore.Application\Phymnary.SugarPot.AspNetCore.Application.csproj" />
-    <ProjectReference Include="..\roslyn\Phymnary.SugarPot.AspNetCore.Api.Roslyn\Phymnary.SugarPot.AspNetCore.Api.Roslyn.csproj">
+    <ProjectReference Include="..\roslyn\Phymnary.SugarPot.AspNetCore.Api.Roslyn\Phymnary.SugarPot.AspNetCore.Api.Roslyn.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <None Include="..\roslyn\$(AssemblyName).Roslyn\bin\$(Configuration)\netstandard2.0\$(AssemblyName).Roslyn.dll" Pack="true" Visible="false" PackagePath="analyzers/dotnet/cs" />
   </ItemGroup>
 
 </Project>

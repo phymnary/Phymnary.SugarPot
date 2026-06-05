@@ -1,4 +1,1 @@
-﻿namespace Phymnary.SugarPot.AspNetCore.IntegrationTests
-{
-    public class Program { }
-}
+﻿Console.WriteLine("Hello, World!");

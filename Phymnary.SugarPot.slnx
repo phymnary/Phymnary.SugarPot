@@ -2,6 +2,7 @@
 	<Folder Name="/Solution Items/">
 		<File Path=".editorconfig" />
 		<File Path=".gitignore" />
+		<File Path="Directory.Build.props" />
 		<File Path="Directory.Packages.props" />
 	</Folder>
 	<Folder Name="/src/">
@@ -13,15 +14,12 @@
 		<Project Path="src/Phymnary.SugarPot.AspNetCore.Host/Phymnary.SugarPot.AspNetCore.Host.csproj" Id="35d86f18-fd84-455e-bac8-bd0611adeab3" />
 		<Project Path="src/Phymnary.SugarPot.DependencyInjection/Phymnary.SugarPot.DependencyInjection.csproj" />
 		<Project Path="src/Phymnary.SugarPot.Module/Phymnary.SugarPot.Module.csproj" Id="d25c6af4-8024-48ea-863c-86954231b728" />
+		<Project Path="src/Phymnary.SugarPot.RoslynComponents/Phymnary.SugarPot.RoslynComponents.csproj" />
 	</Folder>
 	<Folder Name="/src/roslyn/">
 		<File Path="src/roslyn/Directory.Build.props" />
 		<Project Path="src/roslyn/Phymnary.SugarPot.AspNetCore.Api.Roslyn/Phymnary.SugarPot.AspNetCore.Api.Roslyn.csproj" />
 		<Project Path="src/roslyn/Phymnary.SugarPot.DependencyInjection.Roslyn/Phymnary.SugarPot.DependencyInjection.Roslyn.csproj" />
-	</Folder>
-	<Folder Name="/src/shared/">
-		<File Path="src/shared/Directory.Build.props" />
-		<Project Path="src/shared/Phymnary.SugarPot.RoslynComponents/Phymnary.SugarPot.RoslynComponents.csproj" />
 	</Folder>
 	<Folder Name="/test/">
 		<Project Path="test/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Tests/Phymnary.SugarPot.AspNetCore.EntityFrameworkCore.Tests.csproj" Id="f8575ec1-ee1b-464c-87c3-dad41619ba52" />
