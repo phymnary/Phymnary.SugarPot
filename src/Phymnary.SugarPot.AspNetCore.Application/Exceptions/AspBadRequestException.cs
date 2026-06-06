@@ -2,7 +2,9 @@ using System.Net;
 
 namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
-public class AspBadRequestException(string message) : Exception(message), IApplicationException
+public class AspBadRequestException(string message, Exception? innerException = null)
+    : Exception(message, innerException),
+        IApplicationException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
 

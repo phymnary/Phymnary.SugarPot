@@ -2,7 +2,9 @@ using System.Net;
 
 namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
-public class EntityNotFoundException(string message) : Exception(message), IDomainException
+public class EntityNotFoundException(string message, Exception? innerException = null)
+    : Exception(message, innerException),
+        IDomainException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.NotFound;
 

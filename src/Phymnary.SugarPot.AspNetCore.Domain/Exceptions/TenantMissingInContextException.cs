@@ -2,7 +2,9 @@
 
 namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
-public class TenantMissingInContextException(string message) : Exception(message), IDomainException
+public class TenantMissingInContextException(string message, Exception? innerException = null)
+    : Exception(message, innerException),
+        IDomainException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.Forbidden;
 

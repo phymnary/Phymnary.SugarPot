@@ -1,9 +1,11 @@
-using Phymnary.SugarPot.AspNetCore.Entities;
 using System.Net;
+using Phymnary.SugarPot.AspNetCore.Entities;
 
 namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
-public class EntityValidationException(string message) : Exception(message), IDomainException
+public class EntityValidationException(string message, Exception? innerException = null)
+    : Exception(message, innerException),
+        IDomainException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.BadRequest;
 

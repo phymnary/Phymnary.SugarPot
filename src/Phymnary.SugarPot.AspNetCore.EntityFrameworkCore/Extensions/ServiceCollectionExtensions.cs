@@ -8,20 +8,12 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddEfCoreServices<TDbContext>(
         this IServiceCollection services,
-        Action<EfServicesConfigurator<TDbContext>> configure
+        Action<EfServicesConfigurator<TDbContext>>? configure = null
     )
         where TDbContext : DbContext
     {
         var configurator = new EfServicesConfigurator<TDbContext>(services);
-        configure(configurator);
-
-        return ConfigUnderlayAddEfServices(configurator);
-    }
-
-    public static IServiceCollection AddEfCoreServices<TDbContext>(this IServiceCollection services)
-        where TDbContext : DbContext
-    {
-        var configurator = new EfServicesConfigurator<TDbContext>(services);
+        configure?.Invoke(configurator);
 
         return ConfigUnderlayAddEfServices(configurator);
     }
