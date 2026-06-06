@@ -61,6 +61,21 @@ public abstract class EfRepository<TDbContext, TEntity>(
             };
     }
 
+    private async Task<int> SaveChangesAsync(CancellationToken ct)
+    {
+        try
+        {
+            return await dbContext.SaveChangesAsync(ct);
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new EntityPersistenceException(
+                $"Failed to persist {typeof(TEntity).Name} to database",
+                ex
+            );
+        }
+    }
+
     public async Task<TEntity> InsertAsync(
         TEntity entity,
         bool autoSave = true,
@@ -74,7 +89,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         var inserted = _dbSet.Add(entity).Entity;
 
         if (autoSave)
-            await dbContext.SaveChangesAsync(ct);
+            await SaveChangesAsync(ct);
 
         return inserted;
     }
@@ -106,7 +121,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         }
 
         if (autoSave)
-            await dbContext.SaveChangesAsync(ct);
+            await SaveChangesAsync(ct);
 
         return upsert;
     }
@@ -119,7 +134,7 @@ public abstract class EfRepository<TDbContext, TEntity>(
         var ct = GetRequestAborted(cancellationToken);
         await ValidateAsync(entity, ct);
 
-        return await dbContext.SaveChangesAsync(ct);
+        return await SaveChangesAsync(ct);
     }
 
     public async Task<TEntity?> FindAsync(

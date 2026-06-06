@@ -3,7 +3,6 @@ using System.Net.Mime;
 using System.Text.Json;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Exceptions;
@@ -30,9 +29,6 @@ public class AspExceptionHandler : IExceptionHandler
                 errorCode = businessException.ErrorCode;
                 if (businessException is EntityValidationException validationException)
                     failureDetails = validationException.Failures;
-                break;
-            case DbUpdateException:
-                status = HttpStatusCode.FailedDependency;
                 break;
             default:
                 status = HttpStatusCode.InternalServerError;

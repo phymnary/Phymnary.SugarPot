@@ -12,14 +12,19 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the service to.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public static IServiceCollection AddBoilerplateServices(this IServiceCollection services)
+    public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         return services
-            .AddScoped<RunAt>()
+            .AddScoped<IRunAt, RunAt>()
             .AddScoped<ICurrentUser, HttpContextCurrentUser>()
             .AddScoped<ICurrentTenant, HttpContextCurrentTenant>()
-            .AddScoped<IAbortedToken, HttpContextAbortedProvider>()
-            .AddProblemDetails()
-            .AddExceptionHandler<AspExceptionHandler>();
+            .AddScoped<IAbortedToken, HttpContextAbortedProvider>();
+    }
+
+    public static IServiceCollection AddBoilerplateExceptionHandler(
+        this IServiceCollection services
+    )
+    {
+        return services.AddProblemDetails().AddExceptionHandler<AspExceptionHandler>();
     }
 }

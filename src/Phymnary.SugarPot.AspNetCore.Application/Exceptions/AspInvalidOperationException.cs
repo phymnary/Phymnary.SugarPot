@@ -2,8 +2,8 @@ using System.Net;
 
 namespace Phymnary.SugarPot.AspNetCore.Exceptions;
 
-public class AspInvalidOperationException(string message)
-    : InvalidOperationException(message),
+public class AspInvalidOperationException(string message, Exception? innerException = null)
+    : Exception(message, innerException),
         IApplicationException
 {
     public HttpStatusCode StatusCode => HttpStatusCode.UnprocessableEntity;
