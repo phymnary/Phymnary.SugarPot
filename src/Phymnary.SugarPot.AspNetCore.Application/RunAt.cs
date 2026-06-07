@@ -1,11 +1,6 @@
 ﻿namespace Phymnary.SugarPot.AspNetCore;
 
-public interface IRunAt
-{
-    DateTimeOffset Value { get; }
-}
-
-public class RunAt : IRunAt
+internal class RunAt : IRunAt
 {
     public DateTimeOffset Value { get; } = DateTimeOffset.UtcNow;
 }

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Phymnary.SugarPot.AspNetCore.Api;
 using Phymnary.SugarPot.AspNetCore.Api.ExceptionHandler;
 using Phymnary.SugarPot.AspNetCore.MultiTenancy;
 using Phymnary.SugarPot.AspNetCore.Security;
@@ -15,7 +16,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
         return services
-            .AddScoped<IRunAt, RunAt>()
+            .AddSingleton<IScopeBuilder, ApiScopeBuilder>()
             .AddScoped<ICurrentUser, HttpContextCurrentUser>()
             .AddScoped<ICurrentTenant, HttpContextCurrentTenant>()
             .AddScoped<IAbortedToken, HttpContextAbortedProvider>();
