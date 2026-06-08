@@ -3,11 +3,25 @@
   <PropertyGroup>
     <RootNamespace>Phymnary.SugarPot.AspNetCore</RootNamespace>
     <Version>$(AspPackedVersion)</Version>
+    <_DotnetMajor>$(TargetFramework.Replace('net', '').Split('.')[0])</_DotnetMajor>
   </PropertyGroup>
 
+  <Choose>
+    <When Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net10.0'))">
+      <PropertyGroup>
+        <EfVersion>[10.0.0,)</EfVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <EfVersion>[8.0.0,)</EfVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" VersionOverride="$(EfVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" VersionOverride="$(EfVersion)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,24 +2,24 @@
 
 Application-layer primitives for SugarPot ASP.NET Core solutions.
 
-This project currently provides standardized application exceptions that implement `IBusinessException` (through `IApplicationException`) and carry HTTP status semantics plus optional error codes.
+This project provides standardized application exceptions that implement `IBusinessException` (via `IApplicationException`) and carry HTTP status semantics plus optional error codes. Use these types in application services to express HTTP-aware error outcomes; mapping to HTTP responses is the responsibility of API middleware or exception handlers in upper layers.
 
 ## Features
 
-- Common application exception marker: `IApplicationException`
+- Marker interface: `IApplicationException`
 - Predefined exception types with HTTP mappings:
   - `AspBadRequestException` -> `400 BadRequest`
   - `AspUnauthorizedException` -> `401 Unauthorized`
   - `AspForbiddenEndpointException` -> `403 Forbidden`
-  - `AspInvalidOperationException` -> `422 UnprocessableEntity`
-  - `InternalServiceUnavailableException` -> `503 ServiceUnavailable`
-- Optional domain/application error code support via `WithErrorCode(...)`
+  - `AspInvalidOperationException` -> `422 Unprocessable Entity`
+  - `InternalServiceUnavailableException` -> `503 Service Unavailable`
+- Optional error code support via `WithErrorCode(...)`
 
 ## Installation
 
-Add a project/package reference to `Phymnary.SugarPot.AspNetCore.Application`.
+`dotnet add package Phymnary.SugarPot.AspNetCore.Application`
 
-## Quick Usage
+## Quick usage
 
 ```csharp
 using Phymnary.SugarPot.AspNetCore.Exceptions;
@@ -37,42 +37,54 @@ public static class UserAppService
 }
 ```
 
-## Exception Examples
+## Exception examples
 
-### Unauthorized
+Unauthorized:
 
 ```csharp
 throw new AspUnauthorizedException("Missing access token")
     .WithErrorCode("APP_AUTH_UNAUTHORIZED");
 ```
 
-### Forbidden
+Forbidden:
 
 ```csharp
 throw new AspForbiddenEndpointException("You do not have permission to perform this action")
     .WithErrorCode("APP_AUTH_FORBIDDEN");
 ```
 
-### Invalid operation
+Invalid operation:
 
 ```csharp
 throw new AspInvalidOperationException("Order cannot be completed in current state")
     .WithErrorCode("APP_ORDER_INVALID_STATE");
 ```
 
-### Service unavailable
+Service unavailable:
 
 ```csharp
 throw new InternalServiceUnavailableException("Billing provider is temporarily unavailable")
     .WithErrorCode("APP_BILLING_UNAVAILABLE");
 ```
 
-## Notes
+## Mapping to HTTP
 
-- This project is focused on application-layer contracts and exception semantics.
-- Exception-to-response formatting/serialization should be handled by API middleware or exception handlers in upper layers.
+These exception types are intended to be translated to HTTP responses by an exception handling middleware. A typical middleware maps the exception's semantic type to the corresponding HTTP status code and returns a consistent error payload with optional error code and message.
 
-## Target Frameworks
+## Target frameworks
 
-- .NET Standard 2.0
-- .NET 8
+This library targets multiple TFMs used across the solution to maximize compatibility:
+
+- `net8.0`
+- `net9.0`
+- `net10.0`
+
+Check the csproj for the exact TFMs used by this project.
+
+## Contributing
+
+Contributions, bug reports and feature requests are welcome. Please open issues or pull requests on the repository.
+
+## License
+
+See the repository root for license information.

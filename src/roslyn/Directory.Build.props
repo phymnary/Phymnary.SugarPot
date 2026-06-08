@@ -7,16 +7,11 @@
 	  <ImplicitUsings>enable</ImplicitUsings>
 	  <Nullable>enable</Nullable>
 	  <WarningsAsErrors>nullable;</WarningsAsErrors>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
 
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsRoslynComponent>true</IsRoslynComponent>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
@@ -45,13 +40,6 @@
   <ItemGroup>
     <!-- Package the generator in the analyzer directory of the nuget package -->
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="README.md">
-      <Pack>True</Pack>
-      <PackagePath>/</PackagePath>
-    </Content>
   </ItemGroup>
 
 </Project>

@@ -65,7 +65,10 @@ public abstract class EfRepository<TDbContext, TEntity>(
     {
         try
         {
-            return await dbContext.SaveChangesAsync(ct);
+            return await dbContext.SaveChangesAsync(
+                acceptAllChangesOnSuccess: !addons.DbStateManager.IsExecutionStrategyInTransaction,
+                cancellationToken: ct
+            );
         }
         catch (DbUpdateException ex)
         {

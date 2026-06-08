@@ -1,8 +1,22 @@
 # Phymnary.SugarPot.AspNetCore.Api
 
-ASP.NET Core API utilities for SugarPot, including endpoint abstractions, runtime web helpers, and Roslyn-based endpoint source generation.
+ASP.NET Core API utilities for SugarPot, including endpoint abstractions, runtime web helpers, and a Roslyn-based endpoint source generator.
 
-This project works together with `Phymnary.SugarPot.AspNetCore.Api.Roslyn` to reduce boilerplate for minimal APIs by generating endpoint mapping code from attributes.
+This project works together with Phymnary.SugarPot.AspNetCore.Api.Roslyn to reduce boilerplate for minimal APIs by generating endpoint mapping code from attributes and analyzers.
+
+## Table of contents
+
+- Features
+- Source generator (Api.Roslyn)
+- Installation
+- Getting started
+- Group route configuration
+- Manual endpoint mapping
+- Runtime claims mapping
+- Notes & troubleshooting
+- Target frameworks
+- Contributing
+- License
 
 ## Features
 
@@ -11,14 +25,8 @@ This project works together with `Phymnary.SugarPot.AspNetCore.Api.Roslyn` to re
 - Group route pattern support with `[RoutePattern]`
 - Group/endpoint route builder customization with `[RouteBuilder]`
 - API schema grouping with `[ApiSchema]`
-- Extensions to map endpoints and bootstrap runtime services:
-  - `MapEndpoint<TEndpoint>()`
-  - `AddBoilerplateServices()`
-  - `UseBoilerplateServices()`
-- Built-in HTTP-context based providers:
-  - `ICurrentUser`
-  - `ICurrentTenant`
-  - `IAbortedToken`
+- Runtime mapping helpers: `MapEndpoint<TEndpoint>()`, `AddBoilerplateServices()`, `UseBoilerplateServices()`
+- Built-in HTTP-context based providers: `ICurrentUser`, `ICurrentTenant`, `IAbortedToken`
 - Exception handling integration (`AspExceptionHandler`, ProblemDetails)
 
 ---
@@ -27,8 +35,8 @@ This project works together with `Phymnary.SugarPot.AspNetCore.Api.Roslyn` to re
 
 The companion generator project (`Phymnary.SugarPot.AspNetCore.Api.Roslyn`) provides:
 
-- **Incremental source generator** for endpoint mapping code
-- **Analyzer diagnostics** to validate endpoint contracts
+- Incremental source generator for endpoint mapping code
+- Analyzer diagnostics to validate endpoint contracts
 
 ### What it generates
 
@@ -44,36 +52,34 @@ For classes marked with `[ApiSchema]`, it emits schema mapping entry points that
 
 - `SPAPI001` — Missing `HandleAsync` method for `[Endpoint]` classes.
 
+### Packaging note
+
+When this package is produced as a NuGet package the Roslyn analyzer/generator assembly is placed under `analyzers/dotnet/cs` so consumers receive generator functionality automatically when the package is referenced.
+
 ---
 
 ## Installation
 
-Add a project/package reference to `Phymnary.SugarPot.AspNetCore.Api`.
+`dotnet add package Phymnary.SugarPot.AspNetCore.Api`
 
-When consumed as a package in `Release`, the Roslyn analyzer/generator assembly is packed under `analyzers/dotnet/cs` automatically by this project setup.
+## Getting started
 
----
-
-## Quick Start
-
-### 1) Register API runtime services
+### 1) Register runtime services
 
 ```csharp
 using Phymnary.SugarPot.AspNetCore.Extensions;
 
-builder.Services.AddBoilerplateServices();
+builder.Services.AddApiServices().AddBoilerplateExceptionHandler();
 ```
 
-### 2) Add middleware integration
+### 2) Add middleware
 
 ```csharp
-using Phymnary.SugarPot.AspNetCore.Extensions;
-
 var app = builder.Build();
 app.UseBoilerplateServices();
 ```
 
-### 3) Create an endpoint with source generation
+### 3) Create an endpoint (generator will produce mapping)
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
@@ -100,7 +106,7 @@ public partial class GetHealth
 
 ## Group Route Configuration
 
-You can define namespace-near static route helpers and apply them to endpoint groups.
+You can define namespace-level static route helpers and apply them to endpoint groups.
 
 ### Shared route pattern
 
@@ -134,13 +140,13 @@ public static class UserRouteBuilderConfig
 }
 ```
 
-Endpoint-local members (`RoutePattern` property, `BuildRoute` method) override group defaults.
+Endpoint-local `RoutePattern` property and `BuildRoute` method override group defaults.
 
 ---
 
-## Manual Endpoint Mapping (without generator)
+## Manual Endpoint Mapping
 
-If needed, you can map endpoints directly:
+If you prefer not to use the generator you can map endpoints manually:
 
 ```csharp
 using Phymnary.SugarPot.AspNetCore.Api.Extensions;
@@ -152,27 +158,42 @@ app.MapEndpoint<GetHealth>();
 
 ## Runtime Claims Mapping
 
-`UseBoilerplateServices()` reads claims and maps them to scoped providers:
+`UseBoilerplateServices()` maps claims to scoped providers:
 
 - `SubClaimName` (default: `"sub"`) -> `ICurrentUser.Id`
 - `TenantClaimName` (default: `"tenant"`) -> `ICurrentTenant.Id`
 
-You can change claim names via:
-
-- `WebApplicationBuilderExtensions.SubClaimName`
-- `WebApplicationBuilderExtensions.TenantClaimName`
+Claim names can be customized via `WebApplicationBuilderExtensions.SubClaimName` and `WebApplicationBuilderExtensions.TenantClaimName`.
 
 ---
 
-## Notes
+## Notes & troubleshooting
 
-- `[Endpoint]` classes must provide a `HandleAsync` method.
-- HTTP method is resolved from:
-  1. `[Endpoint(Method.X)]` argument,
-  2. class name prefix (`Get*`, `Post*`, etc.),
-  3. namespace suffix (`.get`, `.post`, etc.).
+- `[Endpoint]` classes must provide a `HandleAsync` method (see `SPAPI001` diagnostic).
+- HTTP method resolution order: attribute (`[Endpoint(Method.X)]`), class name prefix (`Get*`, `Post*`, etc.), namespace suffix (`.get`, `.post`, etc.).
 - Keep endpoint classes `partial` to align with generated partial output.
 
-## Target Frameworks
+### Troubleshooting:
 
-- .NET Standard 2.1
+- If generator diagnostics do not appear, ensure the consuming project references the package that contains the analyzer (or adds the analyzer project as an analyzer during development).
+- If mapping is not generated, confirm the endpoint class is public/partial and follows the required shape for `HandleAsync`.
+
+## Target frameworks
+
+This library is built to support multiple TFMs commonly used in the solution. Typical TFMs:
+
+- net8.0
+- net9.0
+- net10.0
+
+Check the project file for exact TFMs.
+
+---
+
+## Contributing
+
+Contributions, bug reports and feature requests are welcome. Please open issues or pull requests on the repository.
+
+## License
+
+See the repository root for license information.
