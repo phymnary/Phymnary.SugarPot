@@ -1,29 +1,33 @@
 # Phymnary.SugarPot.AspNetCore.EntityFrameworkCore
 
-Entity Framework Core integration utilities for Phymnary SugarPot.
+Entity Framework Core integration helpers and repository support for Phymnary SugarPot.
 
-This project provides repository base classes, save-change interceptors, and service configuration helpers to standardize common EF Core behaviors such as auditing, soft delete, and multi-tenancy.
+This project provides EF Core repository base classes, save-change interceptors, model builder helpers, and service registration helpers to standardize common behaviors such as auditing, soft delete, multi-tenancy, and property-change auditing.
 
 ## Features
 
-- `EfRepository<TDbContext, TEntity>` and `EfRepository<TDbContext, TEntity, TKey>` base repositories
-- Query and update options via repository options (`IRepositoryOptions<T>`)
-- Fluent setup through `AddEfCoreServices<TDbContext>()`
+- EfRepository<TDbContext, TEntity> and EfRepository<TDbContext, TEntity, TKey> base repositories
+- Query and update options via repository options (IRepositoryOptions<T>)
+- Fluent setup through AddEfCoreServices<TDbContext>()
 - Built-in save interceptors:
-  - `AuditOnSavingInterceptor`
-  - `SoftDeleteInterceptor`
-  - `SetTenantOnSavingInterceptor`
-- Property-change audit tracking support (`IEntityPropertyChangeTracker`)
+  - AuditOnSavingInterceptor
+  - SoftDeleteInterceptor
+  - SetTenantOnSavingInterceptor
+- Property-change audit tracking support (IEntityPropertyChangeTracker)
 - Model builder helper extensions for default table mapping and query filters
-- Support helpers like `DbFunctionProvider` and `WrappedDbContextTransaction`
+- Supporting helpers like DbFunctionProvider and WrappedDbContextTransaction
 
 ## Installation
 
-Add a project/package reference to `Phymnary.SugarPot.AspNetCore.EntityFrameworkCore`.
+`dotnet add package Phymnary.SugarPot.AspNetCore.EntityFrameworkCore`
+
+### Note about EF Core versions
+
+The project file sets the EF Core package version range based on the target TFM: when targeting net10.0 it prefers EF Core 10.x; for earlier TFMs it targets EF Core 8.x+. See the package's .csproj for details.
 
 ## Service Registration
 
-### Default registration
+Default registration:
 
 ```csharp
 using Phymnary.SugarPot.AspNetCore.Extensions;
@@ -31,29 +35,29 @@ using Phymnary.SugarPot.AspNetCore.Extensions;
 services.AddEfCoreServices<AppDbContext>();
 ```
 
-### Customized registration
+Customized registration:
 
 ```csharp
-services.AddEfCoreServices<AppDbContext>(config =>
-{
-    config.AddSoftDelete();
-    config.AddMultiTenancy();
-
-    config.ConfigureAuditing(audit =>
+services
+    .AddSoftDelete();
+    .AddMultiTenancy()
+    .AddEfCoreServices<AppDbContext>(config =>
     {
-        // configure auditing metadata here
-    });
+        config.ConfigureAuditing(audit =>
+        {
+            // configure auditing metadata here
+        });
 
-    config.AddPropertyChangeAudit<AuditDbContext, AuditLog>(change => new AuditLog
-    {
-        // map IPropertyChangeAudit to your audit entity
+        config.AddPropertyChangeAudit<AuditDbContext, AuditLog>(change => new AuditLog
+        {
+            // map IPropertyChangeAudit to your audit entity
+        });
     });
-});
 ```
 
 ## Repository Base Usage
 
-Create a repository by inheriting `EfRepository`:
+Create a repository by inheriting EfRepository:
 
 ```csharp
 using Microsoft.EntityFrameworkCore;
@@ -69,14 +73,7 @@ public sealed class UserRepository(
 }
 ```
 
-Available operations include:
-
-- `InsertAsync`, `UpsertAsync`, `UpdateAsync`
-- `FindAsync`, `QueryAsync`
-- `AnyAsync`, `CountAsync`
-- `AdvanceQuery(...)`
-- `Delete(...)`
-- `GetAsync(id)` for keyed repositories
+Common operations include `InsertAsync`, `UpsertAsync`, `UpdateAsync`, `FindAsync`, `QueryAsync`, `AnyAsync`, `CountAsync`, `AdvanceQuery(...)`, `Delete(...)`, and `GetAsync(id)` for keyed repositories.
 
 ## Model Configuration Helper
 
@@ -86,11 +83,7 @@ Use model builder extensions to standardize mapping and global filters:
 modelBuilder.BuildEntity<User>(schema: "app");
 ```
 
-`BuildEntity` applies:
-
-- table name = entity type name
-- soft-delete filter when entity implements `ISoftDelete`
-- tenant filter when entity implements `IMultiTenant` and tenant accessor is provided
+`BuildEntity` applies table naming, soft-delete filters for `ISoftDelete`, and tenant filters for `IMultiTenant` when tenant accessor is available.
 
 ## Notes
 
@@ -98,6 +91,20 @@ modelBuilder.BuildEntity<User>(schema: "app");
 - `SetTenantOnSavingInterceptor` enforces tenant assignment for `IMultiTenant` entities.
 - `AuditOnSavingInterceptor` updates audit fields and tracks property changes when enabled.
 
-## Target Frameworks
+## Target frameworks
 
-- .NET Standard 2.1
+This library is built to support a range of TFMs used in the solution. Typical target frameworks include:
+
+- net8.0
+- net9.0
+- net10.0
+
+Check the project file if you need the exact TFMs and EF Core versioning behavior.
+
+## Contributing
+
+Contributions, bug reports and feature requests are welcome. Please open issues or pull requests on the repository.
+
+## License
+
+See the repository root for license information.

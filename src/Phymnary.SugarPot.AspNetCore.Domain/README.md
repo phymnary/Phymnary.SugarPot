@@ -1,39 +1,51 @@
 # Phymnary.SugarPot.AspNetCore.Domain
 
-Core domain contracts and abstractions for SugarPot ASP.NET Core projects.
+Domain contracts and primitives shared across the SugarPot ASP.NET Core stacks.
 
-This project defines the base entity model, repository contracts, auditing interfaces, multi-tenancy contracts, validation primitives, and domain exception types used across the solution.
+This package contains entity abstractions, repository contracts, validation contracts, auditing and multi-tenancy interfaces, runtime context contracts, and domain exception interfaces. It is intentionally framework-agnostic — concrete implementations belong in infrastructure packages.
 
-## Features
+## What this package provides
 
-- Base entity abstractions:
+- Entity model primitives:
   - `IEntity`
   - `Entity<TKey>`
   - `EntityDomainStatus`
+  - `ISoftDelete`
 - Repository contracts:
   - `IRepository<TEntity>`
   - `IRepository<TEntity, TKey>`
-  - advanced query interfaces under `Repositories.AdvanceQueries`
-- Domain validation contracts:
+  - advanced query interfaces in `Repositories.AdvanceQueries`
+  - transaction abstraction in `IQueryTransaction`
+- Validation contracts:
   - `IEntityValidator<TEntity>`
-  - `EntityValidationResult` and failure details
-- Auditing contracts:
+  - `EntityValidationResult`
+  - `EntityValidationFailureDetail`
+- Auditing contracts and metadata helpers:
   - `IAuditable`
-  - property change audit models and attributes
+  - `AuditingAttribute`
+  - `DisabledAuditingAttribute`
+  - `PropertyChangeAudit`
 - Multi-tenancy contracts:
   - `IMultiTenant`
   - `ICurrentTenant`
-- Request/runtime abstractions:
+- Runtime/context contracts:
   - `ICurrentUser`
   - `IRunAt`
   - `IAbortedToken`
-- Domain exceptions and business exception interfaces
+  - `IScopeBuilder`
+  - `IDbFunctionProvider`
+- Domain exception contracts:
+  - `IDomainException`
+  - `IBusinessException`
+  - domain exception types under `Exceptions`
 
 ## Installation
 
-Add a project/package reference to `Phymnary.SugarPot.AspNetCore.Domain`.
+`dotnet add package Phymnary.SugarPot.AspNetCore.Domain`
 
-## Entity Model Example
+## Quick usage
+
+### Entity model
 
 ```csharp
 using Phymnary.SugarPot.AspNetCore.Entities;
@@ -48,72 +60,85 @@ public sealed class User : Entity<Guid>
 }
 ```
 
-## Repository Contract Example
+### Repository contract
 
 ```csharp
-using System.Linq.Expressions;
-using Phymnary.SugarPot.AspNetCore.Entities;
 using Phymnary.SugarPot.AspNetCore.Repositories;
 
 public sealed class UserService(IRepository<User, Guid> users)
 {
-    public Task<User> GetAsync(Guid id, CancellationToken ct)
-        => users.GetAsync(id, cancellationToken: ct);
+    public Task<User> GetAsync(Guid id, CancellationToken cancellationToken)
+        => users.GetAsync(id, cancellationToken: cancellationToken);
 
-    public Task<List<User>> QueryAsync(Expression<Func<User, bool>> predicate, CancellationToken ct)
-        => users.QueryAsync(predicate, cancellationToken: ct);
+    public Task<List<User>> SearchAsync(string keyword, CancellationToken cancellationToken)
+        => users.QueryAsync(
+            x => x.Name.Contains(keyword),
+            cancellationToken: cancellationToken
+        );
 }
 ```
 
-## Validation Example
+### Entity validation contract
 
 ```csharp
 using Phymnary.SugarPot.AspNetCore.Entities;
 
 public sealed class UserValidator : IEntityValidator<User>
 {
-    public ValueTask<EntityValidationResult> ValidateAsync(User entity, CancellationToken cancellationToken = default)
+    public ValueTask<EntityValidationResult> ValidateAsync(
+        User entity,
+        CancellationToken cancellationToken = default
+    )
     {
         if (string.IsNullOrWhiteSpace(entity.Name))
         {
-            return ValueTask.FromResult(new EntityValidationResult
-            {
-                IsValid = false,
-                Errors =
-                [
-                    new EntityValidationFailureDetail
-                    {
-                        Property = nameof(User.Name),
-                        Message = "Name is required"
-                    }
-                ]
-            });
+            return ValueTask.FromResult(
+                new EntityValidationResult
+                {
+                    IsValid = false,
+                    Errors =
+                    [
+                        new EntityValidationFailureDetail
+                        {
+                            Property = nameof(User.Name),
+                            Message = "Name is required"
+                        }
+                    ]
+                }
+            );
         }
 
-        return ValueTask.FromResult(EntityValidationResult.Valid);
+        return ValueTask.FromResult(
+            new EntityValidationResult
+            {
+                IsValid = true,
+                Errors = []
+            }
+        );
     }
 }
 ```
 
-## Auditing and Multi-Tenancy Contracts
+## Layering guidance
 
-Implement these interfaces on entities when needed:
+- Keep this package for domain contracts and types only.
+- Implement repositories, query providers, transactions, and resilient strategies in infrastructure packages.
+- Provide `ICurrentUser`, `ICurrentTenant`, `IRunAt`, and `IAbortedToken` implementations at runtime (for example, via ASP.NET Core host/infrastructure layers).
 
-- `IAuditable` for created/updated metadata
-- `IMultiTenant` for tenant ownership
+## Target frameworks
 
-Use runtime providers from application/infrastructure layers:
+This library targets multiple frameworks to support a range of consumers:
 
-- `ICurrentUser` for current user id
-- `ICurrentTenant` for current tenant id
-- `IRunAt` for current time abstraction
+- net8.0
+- net9.0
+- net10.0
 
-## Notes
+Check the project file for exact target monikers if you need to add or change supported TFMs.
 
-- This project contains contracts and domain-level primitives only.
-- Data access implementations are provided by infrastructure projects (for example, Entity Framework Core integration).
+## Contributing
 
-## Target Frameworks
+Contributions, bug reports and feature requests are welcome. Please open issues or pull requests on the repository.
 
-- .NET Standard 2.0
-- .NET 8
+## License
+
+See the repository root for license information.

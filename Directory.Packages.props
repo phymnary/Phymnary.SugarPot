@@ -9,8 +9,6 @@
     <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="$(MsExtVersion)" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MsExtVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(MsExtVersion)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(MsVersion)" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(MsVersion)" />
     <PackageVersion Include="Phymnary.SugarPot.RoslynComponents" Version="1.0.0" />
     <PackageVersion Include="PolySharp" Version="1.15.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing" Version="1.1.1" />

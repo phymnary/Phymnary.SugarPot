@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Phymnary.SugarPot.AspNetCore.Api" VersionOverride="1.0.0" />
+    <PackageReference Include="Phymnary.SugarPot.AspNetCore.Api" VersionOverride="1.1.0" />
   </ItemGroup>
 
 </Project>

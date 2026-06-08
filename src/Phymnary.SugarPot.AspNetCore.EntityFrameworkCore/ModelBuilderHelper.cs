@@ -8,6 +8,12 @@ namespace Phymnary.SugarPot.AspNetCore;
 
 public class ModelBuilderHelper(ModelBuilder builder)
 {
+#if NET10_0_OR_GREATER
+    public const string SoftDelelteQueryFilterName = "SoftDelete";
+
+    public const string MultiTenancyQueryFilterName = "MultiTenancy";
+#endif
+
     private ModelBuilder _builder = builder;
 
     public Expression<Func<Guid>>? TenantIdAccessor { private get; init; }
