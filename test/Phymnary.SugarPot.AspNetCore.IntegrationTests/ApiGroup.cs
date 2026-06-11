@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿#if !DEBUG
+using Microsoft.AspNetCore.Builder;
 using Phymnary.SugarPot.AspNetCore.Api;
 
 namespace Phymnary.SugarPot.AspNetCore.IntegrationTests;
@@ -19,3 +20,4 @@ public static class ApiGroup
         return builder;
     }
 }
+#endif

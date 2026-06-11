@@ -1,4 +1,5 @@
-﻿using Phymnary.SugarPot.AspNetCore.Api;
+﻿#if !DEBUG
+using Phymnary.SugarPot.AspNetCore.Api;
 
 namespace Phymnary.SugarPot.AspNetCore.IntegrationTests;
 
@@ -10,3 +11,4 @@ internal partial class PostUser
         return 0;
     }
 }
+#endif

@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Phymnary.SugarPot.AspNetCore.Api" VersionOverride="1.1.0" />
+    <ProjectReference Include="..\..\src\Phymnary.SugarPot.DependencyInjection\Phymnary.SugarPot.DependencyInjection.csproj" />
+    <ProjectReference 
+      Include="..\..\src\roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn.csproj"
+      ReferenceOutputAssembly="false" SetTargetFramework="TargetFramework=netstandard2.0" OutputItemType="Analyzer"
+    />
   </ItemGroup>
 
 </Project>
