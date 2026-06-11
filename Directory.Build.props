@@ -3,6 +3,6 @@
     <NoWarn>$(NoWarn);NU1507</NoWarn>
     
     <AspPackedVersion>1.1.1</AspPackedVersion>
-    <DIPackedVersion>1.0.1</DIPackedVersion>
+    <DIPackedVersion>1.0.2</DIPackedVersion>
   </PropertyGroup>
 </Project>

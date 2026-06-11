@@ -47,7 +47,7 @@ partial class AutoRegisterGenerator
                 BaseList(
                     SingletonSeparatedList<BaseTypeSyntax>(
                         SimpleBaseType(
-                            IdentifierName(GeneratorConstant.LibNamespace + ".IAutoRegister")
+                            IdentifierName("global::" + GeneratorConstant.LibNamespace + ".IAutoRegister")
                         )
                     )
                 )
