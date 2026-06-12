@@ -15,9 +15,13 @@
   <ItemGroup>
     <ProjectReference 
       Include="..\roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn\Phymnary.SugarPot.DependencyInjection.Roslyn.csproj"
-      OutputItemType="Analyzer"
       ReferenceOutputAssembly="false"
+      PrivateAssets="all"
     />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)' == 'Release'">
+    <None Include="..\roslyn\$(AssemblyName).Roslyn\bin\$(Configuration)\netstandard2.0\$(AssemblyName).Roslyn.dll" Pack="true" Visible="false" PackagePath="analyzers/dotnet/cs" />
   </ItemGroup>
 
 </Project>

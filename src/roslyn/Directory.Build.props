@@ -9,14 +9,12 @@
 	  <WarningsAsErrors>nullable;</WarningsAsErrors>
 
     <EnableDynamicLoading>true</EnableDynamicLoading>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <IncludeBuildOutput>false</IncludeBuildOutput>
     <IsRoslynComponent>true</IsRoslynComponent>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" PrivateAssets="all" IncludeAssets="all" />
     <PackageReference Include="Phymnary.SugarPot.RoslynComponents" GeneratePathProperty="true" PrivateAssets="all" Pack="false" />
   </ItemGroup>
 
